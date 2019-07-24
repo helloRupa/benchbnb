@@ -6,6 +6,14 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
+    <script>
+      <% if current_user %>
+        window.currentUser = {
+          'username': "<%= current_user.username %>",
+          'id': <%= current_user.id %>
+        }
+      <% end %>
+    </script>
     <%= javascript_include_tag 'application' %>
   </head>
 
