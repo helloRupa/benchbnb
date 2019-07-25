@@ -378,14 +378,18 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 /*!****************************************!*\
   !*** ./frontend/reducers/selectors.js ***!
   \****************************************/
-/*! exports provided: selectCurrentUser */
+/*! exports provided: selectCurrentUser, selectErrors */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectCurrentUser", function() { return selectCurrentUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectErrors", function() { return selectErrors; });
 var selectCurrentUser = function selectCurrentUser(state) {
   return state.entities.users[state.session.id];
+};
+var selectErrors = function selectErrors(state) {
+  return state.errors.session;
 };
 
 /***/ }),
@@ -449,7 +453,6 @@ var sessionReducer = function sessionReducer() {
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
       stateCopy.id = action.user.id;
-      console.log(stateCopy);
       return stateCopy;
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["LOGOUT_CURRENT_USER"]:

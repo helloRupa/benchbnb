@@ -10,7 +10,7 @@ const sessionReducer = (state = defaultState, action) => {
   switch(action.type) {
     case RECEIVE_CURRENT_USER:
       stateCopy.id = action.user.id;
-console.log(stateCopy);
+
       return stateCopy;
     case LOGOUT_CURRENT_USER:
       return defaultState;
