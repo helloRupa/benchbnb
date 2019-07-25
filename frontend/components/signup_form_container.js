@@ -3,9 +3,9 @@ import SessionForm from './session_form';
 import { selectErrors } from '../reducers/selectors';
 import { signup } from '../actions/session_actions';
 
-const mapState = (state, ownProps) => ({
+const mapState = (state) => ({
   errors: selectErrors(state),
-  formType: ownProps.formType,
+  formType: 'signup',
 });
 
 const mapDispatch = (dispatch) => ({
