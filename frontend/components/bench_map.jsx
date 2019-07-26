@@ -17,6 +17,16 @@ export default class BenchMap extends React.Component {
 
   componentDidUpdate() {
     this.MarkerManager.updateMarkers(this.props.benches);
+
+    google.maps.event.addListener(this.map, 'idle', () => {
+      const bounds = this.map.getBounds();
+      const formattedBounds = {
+        'northEast': { 'lat': bounds.getNorthEast().lat(), 'lng': bounds.getNorthEast().lng() },
+        'southWest': { 'lat': bounds.getSouthWest().lat(), 'lng': bounds.getSouthWest().lng() },
+      };
+
+      this.props.updateBounds(formattedBounds);
+    });
   }
 
   render() {
