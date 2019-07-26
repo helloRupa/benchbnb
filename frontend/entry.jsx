@@ -5,6 +5,8 @@ import Root from './root';
 
 /* TEST CODE DELETE WHEN DONE */
 import * as Actions from './actions/session_actions';
+import * as Bactions from './actions/bench_actions';
+window.Bactions = Bactions;
 window.Actions = Actions;
 /* END TEST CODE DELETE WHEN DONE */
 

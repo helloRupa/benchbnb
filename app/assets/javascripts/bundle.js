@@ -125,6 +125,37 @@ var App = function App() {
 
 /***/ }),
 
+/***/ "./frontend/actions/bench_actions.js":
+/*!*******************************************!*\
+  !*** ./frontend/actions/bench_actions.js ***!
+  \*******************************************/
+/*! exports provided: RECEIVE_BENCHES, receiveBenches, fetchBenches */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_BENCHES", function() { return RECEIVE_BENCHES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveBenches", function() { return receiveBenches; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBenches", function() { return fetchBenches; });
+/* harmony import */ var _util_bench_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/bench_api_util */ "./frontend/util/bench_api_util.js");
+
+var RECEIVE_BENCHES = 'RECEIVE_BENCHES';
+var receiveBenches = function receiveBenches(benches) {
+  return {
+    type: RECEIVE_BENCHES,
+    benches: benches
+  };
+};
+var fetchBenches = function fetchBenches() {
+  return function (dispatch) {
+    return _util_bench_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchBenches"]().then(function (benches) {
+      return dispatch(receiveBenches(benches.benches));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session_actions.js":
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
@@ -474,6 +505,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
 /* harmony import */ var _root__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./root */ "./frontend/root.jsx");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _actions_bench_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./actions/bench_actions */ "./frontend/actions/bench_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -483,6 +515,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* TEST CODE DELETE WHEN DONE */
 
 
+
+window.Bactions = _actions_bench_actions__WEBPACK_IMPORTED_MODULE_5__;
 window.Actions = _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__;
 /* END TEST CODE DELETE WHEN DONE */
 
@@ -516,6 +550,40 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /***/ }),
 
+/***/ "./frontend/reducers/benches_reducer.js":
+/*!**********************************************!*\
+  !*** ./frontend/reducers/benches_reducer.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_bench_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/bench_actions */ "./frontend/actions/bench_actions.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var benchesReducer = function benchesReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+  var stateCopy = lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state);
+
+  switch (action.type) {
+    case _actions_bench_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BENCHES"]:
+      return action.benches;
+
+    default:
+      return stateCopy;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (benchesReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/entities_reducer.js":
 /*!***********************************************!*\
   !*** ./frontend/reducers/entities_reducer.js ***!
@@ -527,10 +595,13 @@ document.addEventListener('DOMContentLoaded', function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
+/* harmony import */ var _benches_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./benches_reducer */ "./frontend/reducers/benches_reducer.js");
+
 
 
 var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  benches: _benches_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (entitiesReducer);
 
@@ -764,6 +835,25 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/util/bench_api_util.js":
+/*!*****************************************!*\
+  !*** ./frontend/util/bench_api_util.js ***!
+  \*****************************************/
+/*! exports provided: fetchBenches */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBenches", function() { return fetchBenches; });
+var fetchBenches = function fetchBenches() {
+  return $.ajax({
+    method: 'GET',
+    url: 'api/benches'
+  });
+};
 
 /***/ }),
 
@@ -30212,7 +30302,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
