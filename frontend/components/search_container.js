@@ -8,7 +8,7 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = (dispatch) => ({
-  fetchBenches: () => dispatch(fetchBenches()),
+  fetchBenches: (filters) => dispatch(fetchBenches(filters)),
 });
 
 export default connect(mapState, mapDispatch)(Search);

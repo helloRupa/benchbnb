@@ -152,9 +152,9 @@ var receiveBenches = function receiveBenches(benches) {
     benches: benches
   };
 };
-var fetchBenches = function fetchBenches() {
+var fetchBenches = function fetchBenches(filters) {
   return function (dispatch) {
-    return _util_bench_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchBenches"]().then(function (benches) {
+    return _util_bench_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchBenches"](filters).then(function (benches) {
       return dispatch(receiveBenches(benches.benches));
     });
   };
@@ -268,6 +268,18 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+var testFilter = {
+  bounds: {
+    "northEast": {
+      "lat": "37.80971",
+      "lng": "-122.39208"
+    },
+    "southWest": {
+      "lat": "37.74187",
+      "lng": "-122.47791"
+    }
+  }
+};
 
 var BenchIndex =
 /*#__PURE__*/
@@ -283,7 +295,7 @@ function (_React$Component) {
   _createClass(BenchIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchBenches();
+      this.props.fetchBenches(testFilter);
     }
   }, {
     key: "render",
@@ -583,8 +595,8 @@ var mapState = function mapState(state) {
 
 var mapDispatch = function mapDispatch(dispatch) {
   return {
-    fetchBenches: function fetchBenches() {
-      return dispatch(Object(_actions_bench_actions__WEBPACK_IMPORTED_MODULE_1__["fetchBenches"])());
+    fetchBenches: function fetchBenches(filters) {
+      return dispatch(Object(_actions_bench_actions__WEBPACK_IMPORTED_MODULE_1__["fetchBenches"])(filters));
     }
   };
 };
@@ -1112,10 +1124,13 @@ var configureStore = function configureStore() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBenches", function() { return fetchBenches; });
-var fetchBenches = function fetchBenches() {
+var fetchBenches = function fetchBenches(filters) {
   return $.ajax({
     method: 'GET',
-    url: 'api/benches'
+    url: 'api/benches',
+    data: {
+      bounds: filters.bounds
+    }
   });
 };
 
@@ -30623,7 +30638,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
