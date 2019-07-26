@@ -9,3 +9,7 @@ export const selectErrors = (state) => (
 export const selectBenches = ({ entities: { benches } }) => (
   Object.values(benches)
 );
+
+export const selectBounds = ({ ui: { filters } }) => (
+  filters.bounds
+);

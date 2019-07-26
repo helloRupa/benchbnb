@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
 import { fetchBenches } from '../actions/bench_actions';
-import { selectBenches } from '../reducers/selectors';
+import { selectBenches, selectBounds } from '../reducers/selectors';
 import BenchIndex from './bench_index';
 
 const mapState = (state) => ({
   benches: selectBenches(state),
+  bounds: selectBounds(state),
 });
 
 const mapDispatch = (dispatch) => ({

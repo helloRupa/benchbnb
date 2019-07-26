@@ -8,7 +8,7 @@ const benchesReducer = (state = {}, action) => {
 
   switch(action.type) {
     case RECEIVE_BENCHES:
-      return action.benches;
+      return action.benches || {};
     default:
       return stateCopy;
   }

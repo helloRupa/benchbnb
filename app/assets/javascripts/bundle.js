@@ -289,16 +289,14 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var testFilter = {
-  bounds: {
-    "northEast": {
-      "lat": "37.80971",
-      "lng": "-122.39208"
-    },
-    "southWest": {
-      "lat": "37.74187",
-      "lng": "-122.47791"
-    }
+var defaultFilter = {
+  "northEast": {
+    "lat": "37.80971",
+    "lng": "-122.39208"
+  },
+  "southWest": {
+    "lat": "37.74187",
+    "lng": "-122.47791"
   }
 };
 
@@ -316,7 +314,14 @@ function (_React$Component) {
   _createClass(BenchIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchBenches(testFilter);
+      this.props.fetchBenches(defaultFilter);
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (JSON.stringify(prevProps.bounds) !== JSON.stringify(this.props.bounds)) {
+        this.props.fetchBenches(this.props.bounds);
+      }
     }
   }, {
     key: "render",
@@ -411,6 +416,8 @@ function (_React$Component) {
   _createClass(BenchMap, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      var _this = this;
+
       // set the map to show SF
       var mapOptions = {
         center: {
@@ -423,14 +430,7 @@ function (_React$Component) {
 
       this.map = new google.maps.Map(this.mapNode, mapOptions);
       this.MarkerManager = new _util_marker_manager__WEBPACK_IMPORTED_MODULE_1__["default"](this.map);
-      this.MarkerManager.updateMarkers(this.props.benches);
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      var _this = this;
-
-      this.MarkerManager.updateMarkers(this.props.benches);
+      this.MarkerManager.updateMarkers(this.props.benches, this.props.benchesObj);
       google.maps.event.addListener(this.map, 'idle', function () {
         var bounds = _this.map.getBounds();
 
@@ -447,6 +447,11 @@ function (_React$Component) {
 
         _this.props.updateBounds(formattedBounds);
       });
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      this.MarkerManager.updateMarkers(this.props.benches, this.props.benchesObj);
     }
   }, {
     key: "render",
@@ -594,15 +599,19 @@ __webpack_require__.r(__webpack_exports__);
 var Search = function Search(_ref) {
   var fetchBenches = _ref.fetchBenches,
       benches = _ref.benches,
-      updateBounds = _ref.updateBounds;
+      updateBounds = _ref.updateBounds,
+      bounds = _ref.bounds,
+      benchesObj = _ref.benchesObj;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "search"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_bench_map__WEBPACK_IMPORTED_MODULE_2__["default"], {
     benches: benches,
-    updateBounds: updateBounds
+    updateBounds: updateBounds,
+    benchesObj: benchesObj
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_bench_index__WEBPACK_IMPORTED_MODULE_1__["default"], {
     fetchBenches: fetchBenches,
-    benches: benches
+    benches: benches,
+    bounds: bounds
   }));
 };
 
@@ -632,7 +641,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapState = function mapState(state) {
   return {
-    benches: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["selectBenches"])(state)
+    benches: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["selectBenches"])(state),
+    bounds: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["selectBounds"])(state),
+    benchesObj: state.entities.benches
   };
 };
 
@@ -890,7 +901,7 @@ var benchesReducer = function benchesReducer() {
 
   switch (action.type) {
     case _actions_bench_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BENCHES"]:
-      return action.benches;
+      return action.benches || {};
 
     default:
       return stateCopy;
@@ -1014,7 +1025,7 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 /*!****************************************!*\
   !*** ./frontend/reducers/selectors.js ***!
   \****************************************/
-/*! exports provided: selectCurrentUser, selectErrors, selectBenches */
+/*! exports provided: selectCurrentUser, selectErrors, selectBenches, selectBounds */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1022,6 +1033,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectCurrentUser", function() { return selectCurrentUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectErrors", function() { return selectErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectBenches", function() { return selectBenches; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectBounds", function() { return selectBounds; });
 var selectCurrentUser = function selectCurrentUser(state) {
   return state.entities.users[state.session.id];
 };
@@ -1031,6 +1043,10 @@ var selectErrors = function selectErrors(state) {
 var selectBenches = function selectBenches(_ref) {
   var benches = _ref.entities.benches;
   return Object.values(benches);
+};
+var selectBounds = function selectBounds(_ref2) {
+  var filters = _ref2.ui.filters;
+  return filters.bounds;
 };
 
 /***/ }),
@@ -1229,12 +1245,12 @@ var configureStore = function configureStore() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBenches", function() { return fetchBenches; });
-var fetchBenches = function fetchBenches(filters) {
+var fetchBenches = function fetchBenches(bounds) {
   return $.ajax({
     method: 'GET',
     url: 'api/benches',
     data: {
-      bounds: filters.bounds
+      bounds: bounds
     }
   });
 };
@@ -1268,10 +1284,22 @@ function () {
   }
 
   _createClass(MarkerManager, [{
+    key: "clearMarkers",
+    value: function clearMarkers(benchesObj) {
+      for (var i in this.markers) {
+        if (benchesObj[i] == undefined) {
+          this.markers[i].setMap(null);
+        }
+      }
+
+      this.markers = {};
+    }
+  }, {
     key: "updateMarkers",
-    value: function updateMarkers(benches) {
+    value: function updateMarkers(benches, benchesObj) {
       var _this = this;
 
+      this.clearMarkers(benchesObj);
       benches.forEach(function (bench) {
         if (!_this.markers.hasOwnProperty(bench.id)) {
           _this.createMarkerFromBench(bench);

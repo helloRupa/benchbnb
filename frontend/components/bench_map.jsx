@@ -12,11 +12,7 @@ export default class BenchMap extends React.Component {
     // wrap this.mapNode in a Google Map
     this.map = new google.maps.Map(this.mapNode, mapOptions);
     this.MarkerManager = new MarkerManager(this.map);
-    this.MarkerManager.updateMarkers(this.props.benches);
-  }
-
-  componentDidUpdate() {
-    this.MarkerManager.updateMarkers(this.props.benches);
+    this.MarkerManager.updateMarkers(this.props.benches, this.props.benchesObj);
 
     google.maps.event.addListener(this.map, 'idle', () => {
       const bounds = this.map.getBounds();
@@ -27,6 +23,10 @@ export default class BenchMap extends React.Component {
 
       this.props.updateBounds(formattedBounds);
     });
+  }
+
+  componentDidUpdate() {
+    this.MarkerManager.updateMarkers(this.props.benches, this.props.benchesObj);
   }
 
   render() {

@@ -4,7 +4,19 @@ export default class MarkerManager {
     this.markers = {};
   }
 
-  updateMarkers(benches) {
+  clearMarkers(benchesObj) {
+    for (const i in this.markers) {
+      if (benchesObj[i] == undefined) {
+        this.markers[i].setMap(null);
+      }
+    }
+
+    this.markers = {};
+  }
+
+  updateMarkers(benches, benchesObj) {
+    this.clearMarkers(benchesObj);
+
     benches.forEach((bench) => {
       if (!this.markers.hasOwnProperty(bench.id)) {
         this.createMarkerFromBench(bench);
