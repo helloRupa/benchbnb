@@ -5,3 +5,7 @@ export const selectCurrentUser = (state) => (
 export const selectErrors = (state) => (
   state.errors.session
 );
+
+export const selectBenches = ({ entities: { benches } }) => (
+  Object.values(benches)
+);
