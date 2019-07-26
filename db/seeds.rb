@@ -5,3 +5,42 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+locations = [
+  {
+    description: 'Philz Coffee',
+    lat: 37.759313,
+    lng: -122.4374416
+  },
+  {
+    description: 'ImagiKnit',
+    lat: 37.7603486,
+    lng: -122.4335928
+  },
+  {
+    description: 'Elixir',
+    lat: 37.7640232,
+    lng: -122.4290192
+  },
+  {
+    description: 'DNA Lounge',
+    lat: 37.7695116,
+    lng: -122.4148415
+  },
+  {
+    description: 'Java Beach Cafe',
+    lat: 37.7596113,
+    lng: -122.5086366
+  }
+]
+
+ActiveRecord::Base.transaction do
+  # Clear tables and reset id value
+  [Bench].each do |c|
+    ActiveRecord::Base.connection.execute("TRUNCATE TABLE #{c.table_name} RESTART IDENTITY;")
+  end
+
+  locations.each do |loc|
+    Bench.create(loc)
+  end
+end
