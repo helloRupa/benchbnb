@@ -342,6 +342,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BenchMap; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _util_marker_manager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/marker_manager */ "./frontend/util/marker_manager.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -359,6 +360,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -387,6 +389,13 @@ function (_React$Component) {
       }; // wrap this.mapNode in a Google Map
 
       this.map = new google.maps.Map(this.mapNode, mapOptions);
+      this.MarkerManager = new _util_marker_manager__WEBPACK_IMPORTED_MODULE_1__["default"](this.map);
+      this.MarkerManager.updateMarkers(this.props.benches);
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      this.MarkerManager.updateMarkers(this.props.benches);
     }
   }, {
     key: "render",
@@ -1109,6 +1118,63 @@ var fetchBenches = function fetchBenches() {
     url: 'api/benches'
   });
 };
+
+/***/ }),
+
+/***/ "./frontend/util/marker_manager.js":
+/*!*****************************************!*\
+  !*** ./frontend/util/marker_manager.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MarkerManager; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var MarkerManager =
+/*#__PURE__*/
+function () {
+  function MarkerManager(map) {
+    _classCallCheck(this, MarkerManager);
+
+    this.map = map;
+    this.markers = {};
+  }
+
+  _createClass(MarkerManager, [{
+    key: "updateMarkers",
+    value: function updateMarkers(benches) {
+      var _this = this;
+
+      benches.forEach(function (bench) {
+        if (!_this.markers.hasOwnProperty(bench.id)) {
+          _this.createMarkerFromBench(bench);
+        }
+      });
+    }
+  }, {
+    key: "createMarkerFromBench",
+    value: function createMarkerFromBench(bench) {
+      var pos = new google.maps.LatLng(bench.lat, bench.lng);
+      var marker = new google.maps.Marker({
+        position: pos,
+        map: this.map
+      });
+      this.markers[bench.id] = marker;
+    }
+  }]);
+
+  return MarkerManager;
+}();
+
+
+;
 
 /***/ }),
 
@@ -30557,7 +30623,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
