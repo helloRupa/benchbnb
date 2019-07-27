@@ -5,19 +5,34 @@ class BenchForm extends React.Component {
     super(props);
     this.state = {
       description: '',
-      lat: '',
-      lng: '',
+      lat: this.props.lat,
+      lng: this.props.lng,
       seating: '',
     }
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
     this.setState({ [e.currentTarget.name]: e.currentTarget.value });
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+
+    this.props.createBench(this.state)
+      .then(() => this.props.history.push('/'));
+  }
+
   render() {
+    return (
     <form>
+      <label htmlFor="lat">Latitude:</label>
+      <input type="text" name="lat" id="lat" value={this.state.lat} disabled />
+
+      <label htmlFor="lng">Longitude:</label>
+      <input type="text" name="lng" id="lng" value={this.state.lng} disabled />
+
       <label htmlFor="description">Description</label>
       <input 
         type="text" 
@@ -38,6 +53,7 @@ class BenchForm extends React.Component {
 
         <input type="submit" onClick={this.handleSubmit} />
     </form>
+    );
   }
 }
 

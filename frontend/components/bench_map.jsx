@@ -1,7 +1,8 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import MarkerManager from '../util/marker_manager';
 
-export default class BenchMap extends React.Component {
+class BenchMap extends React.Component {
   componentDidMount() {
     // set map to show SF
     const mapOptions = {
@@ -23,6 +24,16 @@ export default class BenchMap extends React.Component {
 
       this.props.updateBounds(formattedBounds);
     });
+
+    google.maps.event.addListener(this.map, 'click', (e) => {
+      const latitude = e.latLng.lat();
+      const longitude = e.latLng.lng();
+
+      this.props.history.push({
+        pathname: "benches/new",
+        search: `lat=${latitude}&lng=${longitude}`,
+      });
+    });
   }
 
   componentDidUpdate() {
@@ -31,7 +42,9 @@ export default class BenchMap extends React.Component {
 
   render() {
     return (
-      <div id="map-container" ref={ map => this.mapNode = map }></div>
+      <div id="map-container" ref={ map => this.mapNode = map } />
     );
   }
 }
+
+export default withRouter(BenchMap);

@@ -103,6 +103,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_signup_form_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/signup_form_container */ "./frontend/components/signup_form_container.js");
 /* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./util/route_util */ "./frontend/util/route_util.jsx");
 /* harmony import */ var _components_search_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/search_container */ "./frontend/components/search_container.js");
+/* harmony import */ var _components_bench_form_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/bench_form_container */ "./frontend/components/bench_form_container.js");
+
 
 
 
@@ -124,6 +126,10 @@ var App = function App() {
     exact: true,
     path: "/",
     component: _components_search_container__WEBPACK_IMPORTED_MODULE_6__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+    exact: true,
+    path: "/benches/new",
+    component: _components_bench_form_container__WEBPACK_IMPORTED_MODULE_7__["default"]
   }));
 };
 
@@ -135,27 +141,44 @@ var App = function App() {
 /*!*******************************************!*\
   !*** ./frontend/actions/bench_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_BENCHES, receiveBenches, fetchBenches */
+/*! exports provided: RECEIVE_BENCHES, RECEIVE_BENCH, receiveBenches, recieveBench, fetchBenches, createBench */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_BENCHES", function() { return RECEIVE_BENCHES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_BENCH", function() { return RECEIVE_BENCH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveBenches", function() { return receiveBenches; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recieveBench", function() { return recieveBench; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBenches", function() { return fetchBenches; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createBench", function() { return createBench; });
 /* harmony import */ var _util_bench_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/bench_api_util */ "./frontend/util/bench_api_util.js");
 
 var RECEIVE_BENCHES = 'RECEIVE_BENCHES';
+var RECEIVE_BENCH = 'RECEIVE_BENCH';
 var receiveBenches = function receiveBenches(benches) {
   return {
     type: RECEIVE_BENCHES,
     benches: benches
   };
 };
+var recieveBench = function recieveBench(bench) {
+  return {
+    type: RECEIVE_BENCH,
+    bench: bench
+  };
+};
 var fetchBenches = function fetchBenches(filters) {
   return function (dispatch) {
     return _util_bench_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchBenches"](filters).then(function (benches) {
       return dispatch(receiveBenches(benches.benches));
+    });
+  };
+};
+var createBench = function createBench(bench) {
+  return function (dispatch) {
+    return _util_bench_api_util__WEBPACK_IMPORTED_MODULE_0__["createBench"](bench).then(function (bench) {
+      return dispatch(recieveBench(bench));
     });
   };
 };
@@ -257,6 +280,163 @@ var signup = function signup(user) {
     });
   };
 };
+
+/***/ }),
+
+/***/ "./frontend/components/bench_form.jsx":
+/*!********************************************!*\
+  !*** ./frontend/components/bench_form.jsx ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var BenchForm =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(BenchForm, _React$Component);
+
+  function BenchForm(props) {
+    var _this;
+
+    _classCallCheck(this, BenchForm);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(BenchForm).call(this, props));
+    _this.state = {
+      description: '',
+      lat: _this.props.lat,
+      lng: _this.props.lng,
+      seating: ''
+    };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(BenchForm, [{
+    key: "handleChange",
+    value: function handleChange(e) {
+      this.setState(_defineProperty({}, e.currentTarget.name, e.currentTarget.value));
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      var _this2 = this;
+
+      e.preventDefault();
+      this.props.createBench(this.state).then(function () {
+        return _this2.props.history.push('/');
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "lat"
+      }, "Latitude:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        name: "lat",
+        id: "lat",
+        value: this.state.lat,
+        disabled: true
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "lng"
+      }, "Longitude:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        name: "lng",
+        id: "lng",
+        value: this.state.lng,
+        disabled: true
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "description"
+      }, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        name: "description",
+        id: "description",
+        value: this.state.description,
+        onChange: this.handleChange
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "seating"
+      }, "Number of Seats"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "number",
+        name: "seating",
+        id: "seating",
+        min: "1",
+        max: "1000",
+        value: this.state.seating,
+        onChange: this.handleChange
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "submit",
+        onClick: this.handleSubmit
+      }));
+    }
+  }]);
+
+  return BenchForm;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (BenchForm);
+
+/***/ }),
+
+/***/ "./frontend/components/bench_form_container.js":
+/*!*****************************************************!*\
+  !*** ./frontend/components/bench_form_container.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _bench_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bench_form */ "./frontend/components/bench_form.jsx");
+/* harmony import */ var _actions_bench_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/bench_actions */ "./frontend/actions/bench_actions.js");
+
+
+
+
+var mapState = function mapState(state, _ref) {
+  var location = _ref.location;
+  return {
+    lat: new URLSearchParams(location.search).get("lat"),
+    lng: new URLSearchParams(location.search).get("lng")
+  };
+};
+
+var mapDispatch = function mapDispatch(dispatch) {
+  return {
+    createBench: function createBench(bench) {
+      return dispatch(Object(_actions_bench_actions__WEBPACK_IMPORTED_MODULE_2__["createBench"])(bench));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapState, mapDispatch)(_bench_form__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -374,10 +554,10 @@ var BenchIndexItem = function BenchIndexItem(_ref) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BenchMap; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _util_marker_manager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/marker_manager */ "./frontend/util/marker_manager.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _util_marker_manager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/marker_manager */ "./frontend/util/marker_manager.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -395,6 +575,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -426,7 +607,7 @@ function (_React$Component) {
       }; // wrap this.mapNode in a Google Map
 
       this.map = new google.maps.Map(this.mapNode, mapOptions);
-      this.MarkerManager = new _util_marker_manager__WEBPACK_IMPORTED_MODULE_1__["default"](this.map);
+      this.MarkerManager = new _util_marker_manager__WEBPACK_IMPORTED_MODULE_2__["default"](this.map);
       this.MarkerManager.updateMarkers(this.props.benches, this.props.benchesObj);
       google.maps.event.addListener(this.map, 'idle', function () {
         var bounds = _this.map.getBounds();
@@ -443,6 +624,15 @@ function (_React$Component) {
         };
 
         _this.props.updateBounds(formattedBounds);
+      });
+      google.maps.event.addListener(this.map, 'click', function (e) {
+        var latitude = e.latLng.lat();
+        var longitude = e.latLng.lng();
+
+        _this.props.history.push({
+          pathname: "benches/new",
+          search: "lat=".concat(latitude, "&lng=").concat(longitude)
+        });
       });
     }
   }, {
@@ -467,7 +657,7 @@ function (_React$Component) {
   return BenchMap;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(BenchMap));
 
 /***/ }),
 
@@ -900,6 +1090,10 @@ var benchesReducer = function benchesReducer() {
     case _actions_bench_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BENCHES"]:
       return action.benches || {};
 
+    case _actions_bench_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BENCH"]:
+      stateCopy[action.bench.id] = action.bench;
+      return stateCopy;
+
     default:
       return stateCopy;
   }
@@ -1236,17 +1430,27 @@ var configureStore = function configureStore() {
 /*!*****************************************!*\
   !*** ./frontend/util/bench_api_util.js ***!
   \*****************************************/
-/*! exports provided: fetchBenches */
+/*! exports provided: fetchBenches, createBench */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBenches", function() { return fetchBenches; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createBench", function() { return createBench; });
 var fetchBenches = function fetchBenches(filters) {
   return $.ajax({
     method: 'GET',
     url: 'api/benches',
     data: filters
+  });
+};
+var createBench = function createBench(bench) {
+  return $.ajax({
+    method: 'POST',
+    url: 'api/benches',
+    data: {
+      bench: bench
+    }
   });
 };
 
