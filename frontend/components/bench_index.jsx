@@ -1,19 +1,21 @@
 import React from 'react';
 import BenchIndexItem from './bench_index_item';
 
-const defaultFilter = {
-  "northEast": {"lat": "37.80971", "lng": "-122.39208"}, 
-  "southWest": {"lat": "37.74187", "lng": "-122.47791"}
-};
+// const defaultFilter = {
+//   bounds: {
+//     "northEast": {"lat": "37.80971", "lng": "-122.39208"}, 
+//     "southWest": {"lat": "37.74187", "lng": "-122.47791"},
+//   }
+// };
 
 export default class BenchIndex extends React.Component {
-  componentDidMount() {
-    this.props.fetchBenches(defaultFilter);
-  }
+  // componentDidMount() {
+    // this.props.fetchBenches(defaultFilter);
+  // }
 
   componentDidUpdate(prevProps) {
-    if (JSON.stringify(prevProps.bounds) !== JSON.stringify(this.props.bounds)) {
-      this.props.fetchBenches(this.props.bounds);
+    if (JSON.stringify(prevProps.filters) !== JSON.stringify(this.props.filters)) {
+      this.props.fetchBenches(this.props.filters);
     }
   }
 

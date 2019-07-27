@@ -173,13 +173,17 @@ var fetchBenches = function fetchBenches(filters) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_BOUNDS", function() { return UPDATE_BOUNDS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateBounds", function() { return updateBounds; });
+// import { fetchBenches } from './bench_actions';
 var UPDATE_BOUNDS = 'UPDATE_BOUNDS';
 var updateBounds = function updateBounds(bounds) {
   return {
     type: UPDATE_BOUNDS,
     bounds: bounds
   };
-};
+}; // export const updateBounds = (bounds, filters) => (dispatch) => {
+//   dispatch(uBounds(bounds));
+//   return fetchBenches(filters)(dispatch);
+// };
 
 /***/ }),
 
@@ -288,17 +292,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
-
-var defaultFilter = {
-  "northEast": {
-    "lat": "37.80971",
-    "lng": "-122.39208"
-  },
-  "southWest": {
-    "lat": "37.74187",
-    "lng": "-122.47791"
-  }
-};
+ // const defaultFilter = {
+//   bounds: {
+//     "northEast": {"lat": "37.80971", "lng": "-122.39208"}, 
+//     "southWest": {"lat": "37.74187", "lng": "-122.47791"},
+//   }
+// };
 
 var BenchIndex =
 /*#__PURE__*/
@@ -312,15 +311,13 @@ function (_React$Component) {
   }
 
   _createClass(BenchIndex, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.fetchBenches(defaultFilter);
-    }
-  }, {
     key: "componentDidUpdate",
+    // componentDidMount() {
+    // this.props.fetchBenches(defaultFilter);
+    // }
     value: function componentDidUpdate(prevProps) {
-      if (JSON.stringify(prevProps.bounds) !== JSON.stringify(this.props.bounds)) {
-        this.props.fetchBenches(this.props.bounds);
+      if (JSON.stringify(prevProps.filters) !== JSON.stringify(this.props.filters)) {
+        this.props.fetchBenches(this.props.filters);
       }
     }
   }, {
@@ -418,7 +415,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this = this;
 
-      // set the map to show SF
+      // set map to show SF
       var mapOptions = {
         center: {
           lat: 37.7758,
@@ -600,8 +597,8 @@ var Search = function Search(_ref) {
   var fetchBenches = _ref.fetchBenches,
       benches = _ref.benches,
       updateBounds = _ref.updateBounds,
-      bounds = _ref.bounds,
-      benchesObj = _ref.benchesObj;
+      benchesObj = _ref.benchesObj,
+      filters = _ref.filters;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "search"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_bench_map__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -611,7 +608,7 @@ var Search = function Search(_ref) {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_bench_index__WEBPACK_IMPORTED_MODULE_1__["default"], {
     fetchBenches: fetchBenches,
     benches: benches,
-    bounds: bounds
+    filters: filters
   }));
 };
 
@@ -642,8 +639,8 @@ __webpack_require__.r(__webpack_exports__);
 var mapState = function mapState(state) {
   return {
     benches: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["selectBenches"])(state),
-    bounds: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_2__["selectBounds"])(state),
-    benchesObj: state.entities.benches
+    benchesObj: state.entities.benches,
+    filters: state.ui.filters
   };
 };
 
@@ -1245,13 +1242,11 @@ var configureStore = function configureStore() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBenches", function() { return fetchBenches; });
-var fetchBenches = function fetchBenches(bounds) {
+var fetchBenches = function fetchBenches(filters) {
   return $.ajax({
     method: 'GET',
     url: 'api/benches',
-    data: {
-      bounds: bounds
-    }
+    data: filters
   });
 };
 
@@ -1289,6 +1284,7 @@ function () {
       for (var i in this.markers) {
         if (benchesObj[i] == undefined) {
           this.markers[i].setMap(null);
+          this.markers[i] = null;
         }
       }
 

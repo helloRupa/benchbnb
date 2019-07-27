@@ -3,7 +3,7 @@ import MarkerManager from '../util/marker_manager';
 
 export default class BenchMap extends React.Component {
   componentDidMount() {
-    // set the map to show SF
+    // set map to show SF
     const mapOptions = {
       center: { lat: 37.7758, lng: -122.435 }, // this is SF
       zoom: 13

@@ -6,8 +6,8 @@ import Search from './search';
 
 const mapState = (state) => ({
   benches: selectBenches(state),
-  bounds: selectBounds(state),
   benchesObj: state.entities.benches,
+  filters: state.ui.filters,
 });
 
 const mapDispatch = (dispatch) => ({

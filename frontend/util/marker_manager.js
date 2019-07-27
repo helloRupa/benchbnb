@@ -8,6 +8,7 @@ export default class MarkerManager {
     for (const i in this.markers) {
       if (benchesObj[i] == undefined) {
         this.markers[i].setMap(null);
+        this.markers[i] = null;
       }
     }
 
