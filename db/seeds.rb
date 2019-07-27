@@ -10,27 +10,32 @@ locations = [
   {
     description: 'Philz Coffee',
     lat: 37.759313,
-    lng: -122.4374416
+    lng: -122.4374416,
+    seating: 3
   },
   {
     description: 'ImagiKnit',
     lat: 37.7603486,
-    lng: -122.4335928
+    lng: -122.4335928,
+    seating: 5
   },
   {
     description: 'Elixir',
     lat: 37.7640232,
-    lng: -122.4290192
+    lng: -122.4290192,
+    seating: 2
   },
   {
     description: 'DNA Lounge',
     lat: 37.7695116,
-    lng: -122.4148415
+    lng: -122.4148415,
+    seating: 7
   },
   {
     description: 'Java Beach Cafe',
     lat: 37.7596113,
-    lng: -122.5086366
+    lng: -122.5086366,
+    seating: 4
   }
 ]
 

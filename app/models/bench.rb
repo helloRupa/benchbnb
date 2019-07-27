@@ -1,6 +1,6 @@
 class Bench < ApplicationRecord
-  validates :description, :lat, :lng, presence: true
-  validates :lat, :lng, numericality: true
+  validates :description, :lat, :lng, :seating, presence: true
+  validates :lat, :lng, :seating, numericality: true
 
   def self.in_bounds(bounds)
     lats = [bounds['northEast']['lat'], bounds['southWest']['lat']].map(&:to_f).sort
