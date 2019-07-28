@@ -745,7 +745,7 @@ function (_React$Component) {
     value: function handleChange(e) {
       var _this2 = this;
 
-      this.setState(_defineProperty({}, e.currentTarget.name, parseInt(e.currentTarget.value, 10)), function () {
+      this.setState(_defineProperty({}, e.currentTarget.name, parseInt(e.currentTarget.value, 10) || 1), function () {
         if (_this2.state.min_seating <= _this2.state.max_seating) {
           _this2.props.updateSeating(_this2.state);
         }
@@ -1669,8 +1669,16 @@ function () {
       for (var i in this.markers) {
         if (benchesObj[i] == undefined) {
           this.markers[i].setMap(null);
-          this.markers[i] = null;
         }
+      }
+
+      this.markers = {};
+    }
+  }, {
+    key: "clearAllMarkers",
+    value: function clearAllMarkers(benchesObj) {
+      for (var i in this.markers) {
+        this.markers[i].setMap(null);
       }
 
       this.markers = {};
@@ -1680,7 +1688,8 @@ function () {
     value: function updateMarkers(benches, benchesObj) {
       var _this = this;
 
-      this.clearMarkers(benchesObj);
+      // this.clearMarkers(benchesObj);
+      this.clearAllMarkers(benchesObj);
       benches.forEach(function (bench) {
         if (!_this.markers.hasOwnProperty(bench.id)) {
           _this.createMarkerFromBench(bench);

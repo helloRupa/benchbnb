@@ -8,15 +8,23 @@ export default class MarkerManager {
     for (const i in this.markers) {
       if (benchesObj[i] == undefined) {
         this.markers[i].setMap(null);
-        this.markers[i] = null;
       }
     }
 
     this.markers = {};
   }
 
+  clearAllMarkers(benchesObj) {
+    for (const i in this.markers) {
+      this.markers[i].setMap(null);      
+    }
+    
+    this.markers = {};
+  }
+
   updateMarkers(benches, benchesObj) {
-    this.clearMarkers(benchesObj);
+    // this.clearMarkers(benchesObj);
+    this.clearAllMarkers(benchesObj);
 
     benches.forEach((bench) => {
       if (!this.markers.hasOwnProperty(bench.id)) {
