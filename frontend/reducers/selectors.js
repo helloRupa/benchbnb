@@ -13,3 +13,7 @@ export const selectBenches = ({ entities: { benches } }) => (
 export const selectBounds = ({ ui: { filters } }) => (
   filters.bounds
 );
+
+export const selectBenchErrors = (state) => (
+  state.errors.bench
+);

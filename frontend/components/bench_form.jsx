@@ -11,6 +11,7 @@ class BenchForm extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.displayErrors = this.displayErrors.bind(this);
   }
 
   handleChange(e) {
@@ -24,9 +25,18 @@ class BenchForm extends React.Component {
       .then(() => this.props.history.push('/'));
   }
 
+  displayErrors() {
+    return (
+      <div className="errors">
+        {this.props.errors.join(', ')}
+      </div>
+    )
+  }
+
   render() {
     return (
     <form>
+      {this.displayErrors()}
       <label htmlFor="lat">Latitude:</label>
       <input type="text" name="lat" id="lat" value={this.state.lat} disabled />
 

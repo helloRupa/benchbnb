@@ -141,21 +141,24 @@ var App = function App() {
 /*!*******************************************!*\
   !*** ./frontend/actions/bench_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_BENCHES, RECEIVE_BENCH, receiveBenches, recieveBench, fetchBenches, createBench */
+/*! exports provided: RECEIVE_BENCHES, RECEIVE_BENCH, RECEIVE_BENCH_ERRORS, receiveBenches, recieveBench, receiveErrors, fetchBenches, createBench */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_BENCHES", function() { return RECEIVE_BENCHES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_BENCH", function() { return RECEIVE_BENCH; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_BENCH_ERRORS", function() { return RECEIVE_BENCH_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveBenches", function() { return receiveBenches; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recieveBench", function() { return recieveBench; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveErrors", function() { return receiveErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBenches", function() { return fetchBenches; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createBench", function() { return createBench; });
 /* harmony import */ var _util_bench_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/bench_api_util */ "./frontend/util/bench_api_util.js");
 
 var RECEIVE_BENCHES = 'RECEIVE_BENCHES';
 var RECEIVE_BENCH = 'RECEIVE_BENCH';
+var RECEIVE_BENCH_ERRORS = 'RECEIVE_BENCH_ERRORS';
 var receiveBenches = function receiveBenches(benches) {
   return {
     type: RECEIVE_BENCHES,
@@ -168,10 +171,18 @@ var recieveBench = function recieveBench(bench) {
     bench: bench
   };
 };
+var receiveErrors = function receiveErrors(errors) {
+  return {
+    type: RECEIVE_BENCH_ERRORS,
+    errors: errors
+  };
+};
 var fetchBenches = function fetchBenches(filters) {
   return function (dispatch) {
     return _util_bench_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchBenches"](filters).then(function (benches) {
       return dispatch(receiveBenches(benches.benches));
+    }, function (errors) {
+      return dispatch(receiveErrors(errors.responseJSON));
     });
   };
 };
@@ -179,6 +190,8 @@ var createBench = function createBench(bench) {
   return function (dispatch) {
     return _util_bench_api_util__WEBPACK_IMPORTED_MODULE_0__["createBench"](bench).then(function (bench) {
       return dispatch(recieveBench(bench));
+    }, function (errors) {
+      return dispatch(receiveErrors(errors.responseJSON));
     });
   };
 };
@@ -335,6 +348,7 @@ function (_React$Component) {
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.displayErrors = _this.displayErrors.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -354,9 +368,16 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "displayErrors",
+    value: function displayErrors() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "errors"
+      }, this.props.errors.join(', '));
+    }
+  }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, this.displayErrors(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "lat"
       }, "Latitude:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
@@ -416,6 +437,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _bench_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bench_form */ "./frontend/components/bench_form.jsx");
 /* harmony import */ var _actions_bench_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/bench_actions */ "./frontend/actions/bench_actions.js");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../reducers/selectors */ "./frontend/reducers/selectors.js");
+
 
 
 
@@ -424,7 +447,8 @@ var mapState = function mapState(state, _ref) {
   var location = _ref.location;
   return {
     lat: new URLSearchParams(location.search).get("lat"),
-    lng: new URLSearchParams(location.search).get("lng")
+    lng: new URLSearchParams(location.search).get("lng"),
+    errors: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["selectBenchErrors"])(state)
   };
 };
 
@@ -1065,6 +1089,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /***/ }),
 
+/***/ "./frontend/reducers/bench_errors_reducer.js":
+/*!***************************************************!*\
+  !*** ./frontend/reducers/bench_errors_reducer.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_bench_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/bench_actions */ "./frontend/actions/bench_actions.js");
+
+
+var benchErrorsReducers = function benchErrorsReducers() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_bench_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BENCH_ERRORS"]:
+      return action.errors;
+
+    case _actions_bench_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BENCH"]:
+    case _actions_bench_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BENCHES"]:
+      return [];
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (benchErrorsReducers);
+
+/***/ }),
+
 /***/ "./frontend/reducers/benches_reducer.js":
 /*!**********************************************!*\
   !*** ./frontend/reducers/benches_reducer.js ***!
@@ -1137,10 +1194,13 @@ var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_errors_reducer */ "./frontend/reducers/session_errors_reducer.js");
+/* harmony import */ var _bench_errors_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./bench_errors_reducer */ "./frontend/reducers/bench_errors_reducer.js");
+
 
 
 var errorsReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  bench: _bench_errors_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (errorsReducer);
 
@@ -1216,7 +1276,7 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 /*!****************************************!*\
   !*** ./frontend/reducers/selectors.js ***!
   \****************************************/
-/*! exports provided: selectCurrentUser, selectErrors, selectBenches, selectBounds */
+/*! exports provided: selectCurrentUser, selectErrors, selectBenches, selectBounds, selectBenchErrors */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1225,6 +1285,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectErrors", function() { return selectErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectBenches", function() { return selectBenches; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectBounds", function() { return selectBounds; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectBenchErrors", function() { return selectBenchErrors; });
 var selectCurrentUser = function selectCurrentUser(state) {
   return state.entities.users[state.session.id];
 };
@@ -1238,6 +1299,9 @@ var selectBenches = function selectBenches(_ref) {
 var selectBounds = function selectBounds(_ref2) {
   var filters = _ref2.ui.filters;
   return filters.bounds;
+};
+var selectBenchErrors = function selectBenchErrors(state) {
+  return state.errors.bench;
 };
 
 /***/ }),
