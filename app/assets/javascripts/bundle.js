@@ -202,19 +202,29 @@ var createBench = function createBench(bench) {
 /*!********************************************!*\
   !*** ./frontend/actions/filter_actions.js ***!
   \********************************************/
-/*! exports provided: UPDATE_BOUNDS, updateBounds */
+/*! exports provided: UPDATE_BOUNDS, UPDATE_SEATING, updateBounds, updateSeating */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_BOUNDS", function() { return UPDATE_BOUNDS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_SEATING", function() { return UPDATE_SEATING; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateBounds", function() { return updateBounds; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateSeating", function() { return updateSeating; });
 // import { fetchBenches } from './bench_actions';
 var UPDATE_BOUNDS = 'UPDATE_BOUNDS';
+var UPDATE_SEATING = 'UPDATE_SEATING';
 var updateBounds = function updateBounds(bounds) {
   return {
     type: UPDATE_BOUNDS,
     bounds: bounds
+  };
+};
+var updateSeating = function updateSeating(seating) {
+  return {
+    type: UPDATE_SEATING,
+    min_seating: seating.min_seating,
+    max_seating: seating.max_seating
   };
 }; // export const updateBounds = (bounds, filters) => (dispatch) => {
 //   dispatch(uBounds(bounds));
@@ -677,6 +687,105 @@ function (_React$Component) {
 
 /***/ }),
 
+/***/ "./frontend/components/filter_form.jsx":
+/*!*********************************************!*\
+  !*** ./frontend/components/filter_form.jsx ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return FilterForm; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var FilterForm =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(FilterForm, _React$Component);
+
+  function FilterForm(props) {
+    var _this;
+
+    _classCallCheck(this, FilterForm);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(FilterForm).call(this, props));
+    _this.state = {
+      min_seating: 1,
+      max_seating: 10
+    };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(FilterForm, [{
+    key: "handleChange",
+    value: function handleChange(e) {
+      var _this2 = this;
+
+      this.setState(_defineProperty({}, e.currentTarget.name, parseInt(e.currentTarget.value, 10)), function () {
+        if (_this2.state.min_seating <= _this2.state.max_seating) {
+          _this2.props.updateSeating(_this2.state);
+        }
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "minSeating"
+      }, "Min. Seats"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "number",
+        id: "minSeating",
+        name: "min_seating",
+        min: "1",
+        max: "100",
+        value: this.state.min_seating,
+        onChange: this.handleChange
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "maxSeating"
+      }, "Max. Seats"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "number",
+        id: "maxSeating",
+        name: "max_seating",
+        min: "1",
+        max: "100",
+        value: this.state.max_seating,
+        onChange: this.handleChange
+      }));
+    }
+  }]);
+
+  return FilterForm;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+
+;
+
+/***/ }),
+
 /***/ "./frontend/components/greeting.jsx":
 /*!******************************************!*\
   !*** ./frontend/components/greeting.jsx ***!
@@ -795,6 +904,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _bench_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bench_index */ "./frontend/components/bench_index.jsx");
 /* harmony import */ var _bench_map__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./bench_map */ "./frontend/components/bench_map.jsx");
+/* harmony import */ var _filter_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./filter_form */ "./frontend/components/filter_form.jsx");
+
 
 
 
@@ -803,6 +914,7 @@ var Search = function Search(_ref) {
   var fetchBenches = _ref.fetchBenches,
       benches = _ref.benches,
       updateBounds = _ref.updateBounds,
+      updateSeating = _ref.updateSeating,
       benchesObj = _ref.benchesObj,
       filters = _ref.filters;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -811,6 +923,8 @@ var Search = function Search(_ref) {
     benches: benches,
     updateBounds: updateBounds,
     benchesObj: benchesObj
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_form__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    updateSeating: updateSeating
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_bench_index__WEBPACK_IMPORTED_MODULE_1__["default"], {
     fetchBenches: fetchBenches,
     benches: benches,
@@ -857,6 +971,9 @@ var mapDispatch = function mapDispatch(dispatch) {
     },
     updateBounds: function updateBounds(bounds) {
       return dispatch(Object(_actions_filter_actions__WEBPACK_IMPORTED_MODULE_3__["updateBounds"])(bounds));
+    },
+    updateSeating: function updateSeating(seating) {
+      return dispatch(Object(_actions_filter_actions__WEBPACK_IMPORTED_MODULE_3__["updateSeating"])(seating));
     }
   };
 };
@@ -1212,11 +1329,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_1__);
 
 
+var initialState = {
+  bounds: {},
+  min_seating: 1,
+  max_seating: 10
+};
 
 var filterReducer = function filterReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-    bounds: {}
-  };
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
   var stateCopy = lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state);
@@ -1224,6 +1344,11 @@ var filterReducer = function filterReducer() {
   switch (action.type) {
     case _actions_filter_actions__WEBPACK_IMPORTED_MODULE_0__["UPDATE_BOUNDS"]:
       stateCopy.bounds = action.bounds;
+      return stateCopy;
+
+    case _actions_filter_actions__WEBPACK_IMPORTED_MODULE_0__["UPDATE_SEATING"]:
+      stateCopy.min_seating = action.min_seating;
+      stateCopy.max_seating = action.max_seating;
       return stateCopy;
 
     default:

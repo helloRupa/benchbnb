@@ -16,7 +16,7 @@ class Bench < ApplicationRecord
   end
 
   def self.apply_filters(bounds, min_seating, max_seating)
-    return Bench.in_bounds(bounds) unless Bench.seating_is_valid?(min_seating, max_seating)
+    return Bench.in_bounds(bounds) unless Bench.seating_is_valid?(min_seating.to_i, max_seating.to_i)
 
     Bench.in_bounds(bounds).reduce([]) do |benches, bench|
       benches << bench if bench.seating.between?(min_seating.to_i, max_seating.to_i)
