@@ -8,7 +8,7 @@ export default class FilterForm extends React.Component {
   }
 
   handleChange(e) {
-    this.setState({ [e.currentTarget.name]: parseInt(e.currentTarget.value, 10) || 1 },
+    this.setState({ [e.currentTarget.name]: parseInt(e.currentTarget.value, 10) || this.state[e.currentTarget.name] },
     () => {
       if (this.state.min_seating <= this.state.max_seating) {
         this.props.updateSeating(this.state);

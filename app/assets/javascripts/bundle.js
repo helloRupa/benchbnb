@@ -564,7 +564,7 @@ var BenchIndexItem = function BenchIndexItem(_ref) {
   var bench = _ref.bench;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "bench-index-item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, bench.description));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, bench.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Seats: ", bench.seating));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (BenchIndexItem);
@@ -745,7 +745,7 @@ function (_React$Component) {
     value: function handleChange(e) {
       var _this2 = this;
 
-      this.setState(_defineProperty({}, e.currentTarget.name, parseInt(e.currentTarget.value, 10) || 1), function () {
+      this.setState(_defineProperty({}, e.currentTarget.name, parseInt(e.currentTarget.value, 10) || this.state[e.currentTarget.name]), function () {
         if (_this2.state.min_seating <= _this2.state.max_seating) {
           _this2.props.updateSeating(_this2.state);
         }
@@ -904,7 +904,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _bench_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bench_index */ "./frontend/components/bench_index.jsx");
 /* harmony import */ var _bench_map__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./bench_map */ "./frontend/components/bench_map.jsx");
-/* harmony import */ var _filter_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./filter_form */ "./frontend/components/filter_form.jsx");
+/* harmony import */ var _filter_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./filter_form */ "./frontend/components/filter_form.jsx");
 
 
 
@@ -923,7 +923,7 @@ var Search = function Search(_ref) {
     benches: benches,
     updateBounds: updateBounds,
     benchesObj: benchesObj
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_form__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_form__WEBPACK_IMPORTED_MODULE_3__["default"], {
     updateSeating: updateSeating
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_bench_index__WEBPACK_IMPORTED_MODULE_1__["default"], {
     fetchBenches: fetchBenches,
@@ -1669,27 +1669,16 @@ function () {
       for (var i in this.markers) {
         if (benchesObj[i] == undefined) {
           this.markers[i].setMap(null);
+          delete this.markers[i];
         }
       }
-
-      this.markers = {};
-    }
-  }, {
-    key: "clearAllMarkers",
-    value: function clearAllMarkers(benchesObj) {
-      for (var i in this.markers) {
-        this.markers[i].setMap(null);
-      }
-
-      this.markers = {};
     }
   }, {
     key: "updateMarkers",
     value: function updateMarkers(benches, benchesObj) {
       var _this = this;
 
-      // this.clearMarkers(benchesObj);
-      this.clearAllMarkers(benchesObj);
+      this.clearMarkers(benchesObj);
       benches.forEach(function (bench) {
         if (!_this.markers.hasOwnProperty(bench.id)) {
           _this.createMarkerFromBench(bench);
