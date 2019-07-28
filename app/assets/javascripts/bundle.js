@@ -496,12 +496,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
- // const defaultFilter = {
-//   bounds: {
-//     "northEast": {"lat": "37.80971", "lng": "-122.39208"}, 
-//     "southWest": {"lat": "37.74187", "lng": "-122.47791"},
-//   }
-// };
+
 
 var BenchIndex =
 /*#__PURE__*/
@@ -516,9 +511,6 @@ function (_React$Component) {
 
   _createClass(BenchIndex, [{
     key: "componentDidUpdate",
-    // componentDidMount() {
-    // this.props.fetchBenches(defaultFilter);
-    // }
     value: function componentDidUpdate(prevProps) {
       if (JSON.stringify(prevProps.filters) !== JSON.stringify(this.props.filters)) {
         this.props.fetchBenches(this.props.filters);

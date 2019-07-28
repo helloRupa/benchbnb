@@ -20,7 +20,6 @@ const App = () => {
 
       <Route exact path="/" component={ SearchContainer } />
       <ProtectedRoute path="/benches/new" component={BenchFormContainer} exact={true} />
-      {/* <Route exact path="/benches/new" component={ BenchFormContainer } /> */}
     </div>
   );
 };
