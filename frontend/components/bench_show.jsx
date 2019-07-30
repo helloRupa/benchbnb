@@ -1,9 +1,25 @@
 import React from 'react';
+import SingleBenchMap from './single_bench_map';
+import { Link } from 'react-router-dom';
 
-const BenchShow = () => {
-  return (
-    <div>Show bench</div>
-  );
-}
+export default class BenchShow extends React.Component {
 
-export default BenchShow;
+  componentDidMount() {
+    this.props.showBench(this.props.match.params.id);
+  }
+
+  render() {
+    return (
+      <section className="bench-details">
+        <Link to="/">{"<<"} Back to benches</Link>
+        <SingleBenchMap lat={this.props.bench.lat} lng={this.props.bench.lng} />
+        <ul>
+          <li>{this.props.bench.description}</li>
+          <li>{this.props.bench.seating} seats</li>
+          <li>Latitude: {this.props.bench.lat}</li>
+          <li>Longitude: {this.props.bench.lng}</li>
+        </ul>
+      </section>
+    )
+  }
+};

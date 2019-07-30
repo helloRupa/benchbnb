@@ -25,8 +25,12 @@ export default class MarkerManager {
 
   createMarkerFromBench(bench) {
     const pos = new google.maps.LatLng(bench.lat, bench.lng);
-	  const marker = new google.maps.Marker({ position: pos, map: this.map });
-    
+    const marker = new google.maps.Marker({ position: pos, map: this.map, title: bench.description });
+
+    marker.addListener('click', () => {
+      window.location.href = `${window.location}benches/${bench.id}`;
+    });
+
     this.markers[bench.id] = marker;
   }
 };

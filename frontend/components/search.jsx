@@ -7,7 +7,7 @@ const Search = ({ fetchBenches, benches, updateBounds, updateSeating, benchesObj
   <div className="search">
     <BenchMap benches={benches} updateBounds={updateBounds} benchesObj={benchesObj} />
     <FilterForm updateSeating={updateSeating} />
-    <BenchIndex fetchBenches={fetchBenches} benches={benches} filters={filters} showBench={showBench} />
+    <BenchIndex fetchBenches={fetchBenches} benches={benches} filters={filters} />
   </div>
 );
 

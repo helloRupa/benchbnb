@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 
 const BenchIndexItem = ({ bench, showBench, history }) => {
   const fetchBench = () => {
-    showBench(bench.id);
+    // showBench(bench.id);
     history.push(`/benches/${bench.id}`);
   };
 
