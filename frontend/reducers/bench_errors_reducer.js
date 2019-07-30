@@ -1,4 +1,5 @@
 import { RECEIVE_BENCH_ERRORS, RECEIVE_BENCH, RECEIVE_BENCHES } from '../actions/bench_actions';
+import { ADD_REVIEW } from '../actions/review_actions';
 
 const benchErrorsReducers = (state = [], action) => {
   switch(action.type) {
@@ -6,6 +7,7 @@ const benchErrorsReducers = (state = [], action) => {
       return action.errors;
     case RECEIVE_BENCH:
     case RECEIVE_BENCHES:
+    case ADD_REVIEW:
       return [];
     default:
       return state;

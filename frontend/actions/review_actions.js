@@ -1,4 +1,5 @@
 import * as APIUtil from '../util/review_api_util';
+import { receiveErrors } from './bench_actions';
 
 export const ADD_REVIEW = 'ADD_REVIEW';
 
@@ -11,6 +12,6 @@ export const createReview = (review) => (dispatch) => {
   return APIUtil.createReview(review)
     .then(
       (res) => dispatch(addReview(res)),
-      (err) => dispatch(err.responseJSON)
+      (err) => dispatch(receiveErrors(err.responseJSON))
     );
 };

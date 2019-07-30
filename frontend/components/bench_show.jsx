@@ -1,6 +1,8 @@
 import React from 'react';
 import SingleBenchMap from './single_bench_map';
 import { Link } from 'react-router-dom';
+import ReviewFormContainer from './review_form_container';
+import Reviews from './reviews';
 
 export default class BenchShow extends React.Component {
 
@@ -19,12 +21,17 @@ export default class BenchShow extends React.Component {
       <section className="bench-details">
         <Link to="/">{"<<"} Back to benches</Link>
         <SingleBenchMap lat={this.props.bench.lat} lng={this.props.bench.lng} />
+
         <ul>
           <li>{this.props.bench.description}</li>
           <li>{this.props.bench.seating} seats</li>
           <li>Latitude: {this.props.bench.lat}</li>
           <li>Longitude: {this.props.bench.lng}</li>
         </ul>
+
+        <ReviewFormContainer benchId={this.props.match.params.id} />
+
+        <Reviews reviews={this.props.reviews} />
       </section>
     )
   }

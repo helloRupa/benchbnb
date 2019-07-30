@@ -17,3 +17,7 @@ export const selectBounds = ({ ui: { filters } }) => (
 export const selectBenchErrors = (state) => (
   state.errors.bench
 );
+
+export const selectReviews = (state) => (
+  Object.values(state.entities.bench.reviews)
+)
