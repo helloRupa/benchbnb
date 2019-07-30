@@ -4,6 +4,17 @@ class Bench < ApplicationRecord
 
   has_many :reviews
 
+  def add_review(review)
+    self.num_reviews += 1
+    self.review_total += review.rating
+    self.save!
+  end
+
+  def avg_rating
+    return 0 if self.num_reviews.zero?
+    self.review_total * 1.0 / self.num_reviews
+  end
+
   def self.in_bounds(bounds)
     lats = [bounds['northEast']['lat'], bounds['southWest']['lat']].map(&:to_f).sort
     lngs = [bounds['northEast']['lng'], bounds['southWest']['lng']].map(&:to_f).sort

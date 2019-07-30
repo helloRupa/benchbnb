@@ -17,19 +17,22 @@ export default class BenchShow extends React.Component {
   }
 
   render() {
+    const bench = this.props.bench;
+
     return (
       <section className="bench-details">
         <Link to="/">{"<<"} Back to benches</Link>
-        <SingleBenchMap lat={this.props.bench.lat} lng={this.props.bench.lng} />
+        <SingleBenchMap lat={bench.lat} lng={bench.lng} />
 
         <ul>
-          <li>{this.props.bench.description}</li>
-          <li>{this.props.bench.seating} seats</li>
-          <li>Latitude: {this.props.bench.lat}</li>
-          <li>Longitude: {this.props.bench.lng}</li>
+          <li>{bench.description}</li>
+          <li>Score: {bench.rating} (Based on {bench.num_reviews} reviews)</li>
+          <li>{bench.seating} seats</li>
+          <li>Latitude: {bench.lat}</li>
+          <li>Longitude: {bench.lng}</li>
         </ul>
 
-        <ReviewFormContainer benchId={this.props.bench.id} />
+        <ReviewFormContainer benchId={bench.id} />
 
         <Reviews reviews={this.props.reviews} />
       </section>
