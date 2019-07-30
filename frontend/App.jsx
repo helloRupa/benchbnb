@@ -1,6 +1,6 @@
 import React from 'react';
 import GreetingContainer from './components/greeting_container';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import LoginFormContainer from './components/login_form_container';
 import SignupFormContainer from './components/signup_form_container';
 import { AuthRoute, ProtectedRoute } from './util/route_util';
@@ -20,8 +20,11 @@ const App = () => {
       <AuthRoute path="/signup" component={SignupFormContainer} exact={true} />
 
       <Route exact path="/" component={ SearchContainer } />
-      <ProtectedRoute path="/benches/new" component={BenchFormContainer} exact={true} />
-      <Route path="/benches/:id" component={BenchShowContainer} />
+
+      <Switch>
+        <ProtectedRoute path="/benches/new" component={BenchFormContainer} exact={true} />
+        <Route path="/benches/:id" component={BenchShowContainer} exact />
+      </Switch>
     </div>
   );
 };

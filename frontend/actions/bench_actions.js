@@ -44,7 +44,13 @@ export const createBench = (bench) => (dispatch) => {
 export const showBench = (id) => (dispatch) => {
   return APIUtil.showBench(id)
     .then(
-      (bench) => dispatch(receiveSingleBench(bench)),
-      (errors) => dispatch(receiveErrors(errors.responseJSON))
+      (bench) => {
+        dispatch(receiveSingleBench(bench));
+        return bench;
+      },
+      (errors) => {
+        dispatch(receiveErrors(errors.responseJSON));
+        $.Deferred().reject(errors);
+      }
     );
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class BenchForm extends React.Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class BenchForm extends React.Component {
   render() {
     return (
     <form>
+      <Link to="/">{"<<"} Back to benches</Link>
       {this.displayErrors()}
       <label htmlFor="lat">Latitude:</label>
       <input type="text" name="lat" id="lat" value={this.state.lat} disabled />

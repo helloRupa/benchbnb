@@ -128,14 +128,15 @@ var App = function App() {
     exact: true,
     path: "/",
     component: _components_search_container__WEBPACK_IMPORTED_MODULE_6__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["ProtectedRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["ProtectedRoute"], {
     path: "/benches/new",
     component: _components_bench_form_container__WEBPACK_IMPORTED_MODULE_7__["default"],
     exact: true
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/benches/:id",
-    component: _components_bench_show_container__WEBPACK_IMPORTED_MODULE_8__["default"]
-  }));
+    component: _components_bench_show_container__WEBPACK_IMPORTED_MODULE_8__["default"],
+    exact: true
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -213,9 +214,11 @@ var createBench = function createBench(bench) {
 var showBench = function showBench(id) {
   return function (dispatch) {
     return _util_bench_api_util__WEBPACK_IMPORTED_MODULE_0__["showBench"](id).then(function (bench) {
-      return dispatch(receiveSingleBench(bench));
+      dispatch(receiveSingleBench(bench));
+      return bench;
     }, function (errors) {
-      return dispatch(receiveErrors(errors.responseJSON));
+      dispatch(receiveErrors(errors.responseJSON));
+      $.Deferred().reject(errors);
     });
   };
 };
@@ -376,6 +379,7 @@ var signup = function signup(user) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -395,6 +399,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -446,7 +451,9 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, this.displayErrors(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/"
+      }, "<<", " Back to benches"), this.displayErrors(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "lat"
       }, "Latitude:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
@@ -809,18 +816,18 @@ function (_React$Component) {
 
   _createClass(BenchShow, [{
     key: "componentDidMount",
-    // constructor(props) {
-    //   super(props);
-    //   this.state = { rating: this.props.bench.rating }
-    // }
     value: function componentDidMount() {
       this.props.showBench(this.props.match.params.id);
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
+      var _this = this;
+
       if (prevProps.match.params.id !== this.props.match.params.id) {
-        this.props.showBench(this.props.match.params.id);
+        this.props.showBench(this.props.match.params.id).fail(function (err) {
+          return _this.props.history.push('/');
+        });
       }
     }
   }, {
@@ -871,7 +878,8 @@ __webpack_require__.r(__webpack_exports__);
 var mapState = function mapState(state) {
   return {
     bench: state.entities.bench,
-    reviews: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["selectReviews"])(state)
+    reviews: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["selectReviews"])(state),
+    errors: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["selectBenchErrors"])(state)
   };
 };
 
