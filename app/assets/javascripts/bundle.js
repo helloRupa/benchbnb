@@ -832,7 +832,7 @@ function (_React$Component) {
         lat: this.props.bench.lat,
         lng: this.props.bench.lng
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, this.props.bench.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, this.props.bench.seating, " seats"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Latitude: ", this.props.bench.lat), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Longitude: ", this.props.bench.lng)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        benchId: this.props.match.params.id
+        benchId: this.props.bench.id
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews__WEBPACK_IMPORTED_MODULE_4__["default"], {
         reviews: this.props.reviews
       }));
@@ -1145,6 +1145,15 @@ function (_React$Component) {
   }
 
   _createClass(ReviewForm, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.benchId !== this.state.bench_id) {
+        this.setState({
+          bench_id: this.props.benchId
+        });
+      }
+    }
+  }, {
     key: "handleChange",
     value: function handleChange(e) {
       this.setState(_defineProperty({}, e.currentTarget.name, e.currentTarget.value));

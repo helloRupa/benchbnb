@@ -29,7 +29,7 @@ export default class BenchShow extends React.Component {
           <li>Longitude: {this.props.bench.lng}</li>
         </ul>
 
-        <ReviewFormContainer benchId={this.props.match.params.id} />
+        <ReviewFormContainer benchId={this.props.bench.id} />
 
         <Reviews reviews={this.props.reviews} />
       </section>

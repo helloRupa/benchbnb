@@ -9,6 +9,12 @@ export default class ReviewForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.benchId !== this.state.bench_id) {
+      this.setState({ bench_id: this.props.benchId });
+    }
+  }
+
   handleChange(e) {
     this.setState({ [e.currentTarget.name]: e.currentTarget.value });
   }
