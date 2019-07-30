@@ -5,6 +5,10 @@ import ReviewFormContainer from './review_form_container';
 import Reviews from './reviews';
 
 export default class BenchShow extends React.Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = { rating: this.props.bench.rating }
+  // }
 
   componentDidMount() {
     this.props.showBench(this.props.match.params.id);

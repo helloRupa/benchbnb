@@ -10,6 +10,9 @@ const singleBenchReducer = (state = { reviews: {} }, action) => {
       return action.bench;
     case ADD_REVIEW:
       stateCopy.reviews[action.review.id] = action.review;
+      stateCopy.num_reviews += 1;
+      stateCopy.rating = (stateCopy.rating + action.review.rating) / stateCopy.num_reviews;
+      
       return stateCopy;
     default:
       return state;

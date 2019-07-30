@@ -809,6 +809,10 @@ function (_React$Component) {
 
   _createClass(BenchShow, [{
     key: "componentDidMount",
+    // constructor(props) {
+    //   super(props);
+    //   this.state = { rating: this.props.bench.rating }
+    // }
     value: function componentDidMount() {
       this.props.showBench(this.props.match.params.id);
     }
@@ -2013,6 +2017,8 @@ var singleBenchReducer = function singleBenchReducer() {
 
     case _actions_review_actions__WEBPACK_IMPORTED_MODULE_1__["ADD_REVIEW"]:
       stateCopy.reviews[action.review.id] = action.review;
+      stateCopy.num_reviews += 1;
+      stateCopy.rating = (stateCopy.rating + action.review.rating) / stateCopy.num_reviews;
       return stateCopy;
 
     default:
