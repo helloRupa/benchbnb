@@ -776,6 +776,13 @@ function (_React$Component) {
       this.props.showBench(this.props.match.params.id);
     }
   }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.match.params.id !== this.props.match.params.id) {
+        this.props.showBench(this.props.match.params.id);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {

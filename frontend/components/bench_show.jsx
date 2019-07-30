@@ -8,6 +8,12 @@ export default class BenchShow extends React.Component {
     this.props.showBench(this.props.match.params.id);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.props.showBench(this.props.match.params.id);
+    }
+  }
+
   render() {
     return (
       <section className="bench-details">

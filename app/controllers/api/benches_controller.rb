@@ -16,7 +16,8 @@ class Api::BenchesController < ApplicationController
   end
 
   def show
-    @bench = Bench.find_by_id(params[:id])
+    bench = Bench.where(id: params[:id]).includes(reviews: :user)
+    @bench = bench.first
 
     if @bench
       render :show
