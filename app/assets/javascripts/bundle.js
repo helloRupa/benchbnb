@@ -104,6 +104,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./util/route_util */ "./frontend/util/route_util.jsx");
 /* harmony import */ var _components_search_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/search_container */ "./frontend/components/search_container.js");
 /* harmony import */ var _components_bench_form_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/bench_form_container */ "./frontend/components/bench_form_container.js");
+/* harmony import */ var _components_bench_show_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/bench_show_container */ "./frontend/components/bench_show_container.js");
+
 
 
 
@@ -130,6 +132,9 @@ var App = function App() {
     path: "/benches/new",
     component: _components_bench_form_container__WEBPACK_IMPORTED_MODULE_7__["default"],
     exact: true
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+    path: "/benches/:id",
+    component: _components_bench_show_container__WEBPACK_IMPORTED_MODULE_8__["default"]
   }));
 };
 
@@ -141,7 +146,7 @@ var App = function App() {
 /*!*******************************************!*\
   !*** ./frontend/actions/bench_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_BENCHES, RECEIVE_BENCH, RECEIVE_BENCH_ERRORS, receiveBenches, recieveBench, receiveErrors, fetchBenches, createBench */
+/*! exports provided: RECEIVE_BENCHES, RECEIVE_BENCH, RECEIVE_BENCH_ERRORS, RECEIVE_SINGLE_BENCH, receiveBenches, receiveBench, receiveErrors, receiveSingleBench, fetchBenches, createBench, showBench */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -149,23 +154,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_BENCHES", function() { return RECEIVE_BENCHES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_BENCH", function() { return RECEIVE_BENCH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_BENCH_ERRORS", function() { return RECEIVE_BENCH_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SINGLE_BENCH", function() { return RECEIVE_SINGLE_BENCH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveBenches", function() { return receiveBenches; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recieveBench", function() { return recieveBench; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveBench", function() { return receiveBench; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveErrors", function() { return receiveErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveSingleBench", function() { return receiveSingleBench; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBenches", function() { return fetchBenches; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createBench", function() { return createBench; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showBench", function() { return showBench; });
 /* harmony import */ var _util_bench_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/bench_api_util */ "./frontend/util/bench_api_util.js");
 
 var RECEIVE_BENCHES = 'RECEIVE_BENCHES';
 var RECEIVE_BENCH = 'RECEIVE_BENCH';
 var RECEIVE_BENCH_ERRORS = 'RECEIVE_BENCH_ERRORS';
+var RECEIVE_SINGLE_BENCH = 'RECEIVE_SINGLE_BENCH';
 var receiveBenches = function receiveBenches(benches) {
   return {
     type: RECEIVE_BENCHES,
     benches: benches
   };
 };
-var recieveBench = function recieveBench(bench) {
+var receiveBench = function receiveBench(bench) {
   return {
     type: RECEIVE_BENCH,
     bench: bench
@@ -175,6 +184,12 @@ var receiveErrors = function receiveErrors(errors) {
   return {
     type: RECEIVE_BENCH_ERRORS,
     errors: errors
+  };
+};
+var receiveSingleBench = function receiveSingleBench(bench) {
+  return {
+    type: RECEIVE_SINGLE_BENCH,
+    bench: bench
   };
 };
 var fetchBenches = function fetchBenches(filters) {
@@ -189,7 +204,16 @@ var fetchBenches = function fetchBenches(filters) {
 var createBench = function createBench(bench) {
   return function (dispatch) {
     return _util_bench_api_util__WEBPACK_IMPORTED_MODULE_0__["createBench"](bench).then(function (bench) {
-      return dispatch(recieveBench(bench));
+      return dispatch(receiveBench(bench));
+    }, function (errors) {
+      return dispatch(receiveErrors(errors.responseJSON));
+    });
+  };
+};
+var showBench = function showBench(id) {
+  return function (dispatch) {
+    return _util_bench_api_util__WEBPACK_IMPORTED_MODULE_0__["showBench"](id).then(function (bench) {
+      return dispatch(receiveSingleBench(bench));
     }, function (errors) {
       return dispatch(receiveErrors(errors.responseJSON));
     });
@@ -529,12 +553,15 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this = this;
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "benches"
       }, this.props.benches.map(function (bench) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_bench_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: bench.id,
-          bench: bench
+          bench: bench,
+          showBench: _this.props.showBench
         });
       }));
     }
@@ -558,16 +585,28 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
 
 
 var BenchIndexItem = function BenchIndexItem(_ref) {
-  var bench = _ref.bench;
+  var bench = _ref.bench,
+      showBench = _ref.showBench,
+      history = _ref.history;
+
+  var fetchBench = function fetchBench() {
+    showBench(bench.id);
+    history.push("/benches/".concat(bench.id));
+  };
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "bench-index-item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, bench.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Seats: ", bench.seating));
+    className: "bench-index-item",
+    key: bench.id,
+    onClick: fetchBench
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, bench.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, bench.seating, " seats"));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (BenchIndexItem);
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(BenchIndexItem));
 
 /***/ }),
 
@@ -684,6 +723,51 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(BenchMap));
+
+/***/ }),
+
+/***/ "./frontend/components/bench_show.jsx":
+/*!********************************************!*\
+  !*** ./frontend/components/bench_show.jsx ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var BenchShow = function BenchShow() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Show bench");
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (BenchShow);
+
+/***/ }),
+
+/***/ "./frontend/components/bench_show_container.js":
+/*!*****************************************************!*\
+  !*** ./frontend/components/bench_show_container.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _bench_show__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bench_show */ "./frontend/components/bench_show.jsx");
+
+
+
+var mapState = function mapState(state) {
+  return {
+    bench: state.entities.bench
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapState)(_bench_show__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -916,7 +1000,8 @@ var Search = function Search(_ref) {
       updateBounds = _ref.updateBounds,
       updateSeating = _ref.updateSeating,
       benchesObj = _ref.benchesObj,
-      filters = _ref.filters;
+      filters = _ref.filters,
+      showBench = _ref.showBench;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "search"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_bench_map__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -928,7 +1013,8 @@ var Search = function Search(_ref) {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_bench_index__WEBPACK_IMPORTED_MODULE_1__["default"], {
     fetchBenches: fetchBenches,
     benches: benches,
-    filters: filters
+    filters: filters,
+    showBench: showBench
   }));
 };
 
@@ -974,6 +1060,9 @@ var mapDispatch = function mapDispatch(dispatch) {
     },
     updateSeating: function updateSeating(seating) {
       return dispatch(Object(_actions_filter_actions__WEBPACK_IMPORTED_MODULE_3__["updateSeating"])(seating));
+    },
+    showBench: function showBench(id) {
+      return dispatch(Object(_actions_bench_actions__WEBPACK_IMPORTED_MODULE_1__["showBench"])(id));
     }
   };
 };
@@ -1281,12 +1370,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
 /* harmony import */ var _benches_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./benches_reducer */ "./frontend/reducers/benches_reducer.js");
+/* harmony import */ var _single_bench_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./single_bench_reducer */ "./frontend/reducers/single_bench_reducer.js");
+
 
 
 
 var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  benches: _benches_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  benches: _benches_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  bench: _single_bench_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (entitiesReducer);
 
@@ -1496,6 +1588,35 @@ var sessionReducer = function sessionReducer() {
 
 /***/ }),
 
+/***/ "./frontend/reducers/single_bench_reducer.js":
+/*!***************************************************!*\
+  !*** ./frontend/reducers/single_bench_reducer.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_bench_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/bench_actions */ "./frontend/actions/bench_actions.js");
+
+
+var singleBenchReducer = function singleBenchReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_bench_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SINGLE_BENCH"]:
+      return action.bench;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (singleBenchReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/ui_reducer.js":
 /*!*****************************************!*\
   !*** ./frontend/reducers/ui_reducer.js ***!
@@ -1611,13 +1732,14 @@ var configureStore = function configureStore() {
 /*!*****************************************!*\
   !*** ./frontend/util/bench_api_util.js ***!
   \*****************************************/
-/*! exports provided: fetchBenches, createBench */
+/*! exports provided: fetchBenches, createBench, showBench */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchBenches", function() { return fetchBenches; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createBench", function() { return createBench; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showBench", function() { return showBench; });
 var fetchBenches = function fetchBenches(filters) {
   return $.ajax({
     method: 'GET',
@@ -1632,6 +1754,12 @@ var createBench = function createBench(bench) {
     data: {
       bench: bench
     }
+  });
+};
+var showBench = function showBench(id) {
+  return $.ajax({
+    method: 'GET',
+    url: "api/benches/".concat(id)
   });
 };
 

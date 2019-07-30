@@ -13,3 +13,10 @@ export const createBench = (bench) => {
     data: { bench },
   });
 }
+
+export const showBench = (id) => {
+  return $.ajax({
+    method: 'GET',
+    url: `api/benches/${id}`
+  });
+}

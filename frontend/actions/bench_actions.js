@@ -3,13 +3,14 @@ import * as APIUtil from '../util/bench_api_util';
 export const RECEIVE_BENCHES = 'RECEIVE_BENCHES';
 export const RECEIVE_BENCH = 'RECEIVE_BENCH';
 export const RECEIVE_BENCH_ERRORS = 'RECEIVE_BENCH_ERRORS';
+export const RECEIVE_SINGLE_BENCH = 'RECEIVE_SINGLE_BENCH';
 
 export const receiveBenches = (benches) => ({
   type: RECEIVE_BENCHES,
   benches
 });
 
-export const recieveBench = (bench) => ({
+export const receiveBench = (bench) => ({
   type: RECEIVE_BENCH,
   bench
 });
@@ -17,6 +18,11 @@ export const recieveBench = (bench) => ({
 export const receiveErrors = (errors) => ({
   type: RECEIVE_BENCH_ERRORS,
   errors
+});
+
+export const receiveSingleBench = (bench) => ({
+  type: RECEIVE_SINGLE_BENCH,
+  bench
 });
 
 export const fetchBenches = (filters) => (dispatch) => {
@@ -30,7 +36,15 @@ export const fetchBenches = (filters) => (dispatch) => {
 export const createBench = (bench) => (dispatch) => {
   return APIUtil.createBench(bench)
     .then(
-      (bench) => dispatch(recieveBench(bench)),
+      (bench) => dispatch(receiveBench(bench)),
       (errors) => dispatch(receiveErrors(errors.responseJSON))
-    )
+    );
+};
+
+export const showBench = (id) => (dispatch) => {
+  return APIUtil.showBench(id)
+    .then(
+      (bench) => dispatch(receiveSingleBench(bench)),
+      (errors) => dispatch(receiveErrors(errors.responseJSON))
+    );
 };

@@ -1,12 +1,18 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
-const BenchIndexItem = ({ bench }) => {
+const BenchIndexItem = ({ bench, showBench, history }) => {
+  const fetchBench = () => {
+    showBench(bench.id);
+    history.push(`/benches/${bench.id}`);
+  };
+
   return (
-    <div className="bench-index-item">
+    <div className="bench-index-item" key={bench.id} onClick={fetchBench} >
       <p>{bench.description}</p>
-      <p>Seats: {bench.seating}</p>
+      <p>{bench.seating} seats</p>
     </div>
   );
 };
 
-export default BenchIndexItem;
+export default withRouter(BenchIndexItem);

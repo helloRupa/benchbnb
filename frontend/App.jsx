@@ -6,6 +6,7 @@ import SignupFormContainer from './components/signup_form_container';
 import { AuthRoute, ProtectedRoute } from './util/route_util';
 import SearchContainer from './components/search_container';
 import BenchFormContainer from './components/bench_form_container';
+import BenchShowContainer from './components/bench_show_container';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
 
       <Route exact path="/" component={ SearchContainer } />
       <ProtectedRoute path="/benches/new" component={BenchFormContainer} exact={true} />
+      <Route path="/benches/:id" component={BenchShowContainer} />
     </div>
   );
 };

@@ -15,6 +15,16 @@ class Api::BenchesController < ApplicationController
     end
   end
 
+  def show
+    @bench = Bench.find_by_id(params[:id])
+
+    if @bench
+      render :show
+    else
+      render json: ['Sorry, that bench does not exist'], status: 422
+    end
+  end
+
   private
 
   def bench_params

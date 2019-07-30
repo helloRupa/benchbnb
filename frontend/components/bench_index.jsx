@@ -11,7 +11,7 @@ export default class BenchIndex extends React.Component {
   render() {
     return (
       <section className="benches">
-        { this.props.benches.map((bench) => <BenchIndexItem key={bench.id} bench={bench} />) }
+        { this.props.benches.map((bench) => <BenchIndexItem key={bench.id} bench={bench} showBench={this.props.showBench} />) }
       </section>
     );
   }
