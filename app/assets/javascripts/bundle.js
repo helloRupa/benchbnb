@@ -1273,7 +1273,7 @@ var Reviews = function Reviews(_ref) {
   var reviews = _ref.reviews;
 
   var showReview = function showReview(review) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, review.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, review.rating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, review.comment));
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, review.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, review.date), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, review.rating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, review.comment));
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, reviews.map(function (review) {

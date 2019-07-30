@@ -5,6 +5,7 @@ const Reviews = ({ reviews }) => {
   const showReview = (review) => (
     <div>
       <h3>{review.username}</h3>
+      <p>{review.date}</p>
       <p>{review.rating}</p>
       <p>{review.comment}</p>
     </div>
