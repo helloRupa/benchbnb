@@ -17,8 +17,8 @@ export default class FilterForm extends React.Component {
   }
 
   render() {
-    return(
-      <form>
+    return (
+      <form className="seating">
         <label htmlFor="minSeating">Min. Seats</label>
         <input 
           type="number"

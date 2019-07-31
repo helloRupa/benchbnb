@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Greeting = ({ currentUser, logout }) => {
   const greeting = (currentUser) ? (
     <div>
-      <p>Welcome {currentUser.username}!</p>
+      <p>Hi {currentUser.username}!</p>
       <button onClick={logout}>Logout</button>
     </div>
   ) : (
@@ -15,7 +15,7 @@ const Greeting = ({ currentUser, logout }) => {
   );
 
   return (
-    <div>
+    <div className="greeting">
       {greeting}
     </div>
   );

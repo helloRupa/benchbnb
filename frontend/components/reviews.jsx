@@ -5,14 +5,14 @@ const Reviews = ({ reviews }) => {
   const showReview = (review) => (
     <div>
       <h3>{review.username}</h3>
-      <p>{review.date}</p>
-      <p>{review.rating}</p>
+      <span className="date">{review.date}</span>
+      <span className="rating">{review.rating}</span>
       <p>{review.comment}</p>
     </div>
   );
 
   return (
-    <div>
+    <div className="reviews">
       {reviews.map((review) => <div key={review.id}>{showReview(review)}</div>)}
     </div>
   );

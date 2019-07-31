@@ -1,17 +1,18 @@
 import React from 'react';
+import DisplayErrors from './display_errors';
+import { withRouter } from 'react-router-dom';
 
-export default class ReviewForm extends React.Component {
+class ReviewForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { bench_id: this.props.benchId, comment: '', rating: '' };
-    this.displayErrors = this.displayErrors.bind(this);
+    this.state = { bench_id: this.props.match.params.id, comment: '', rating: '' };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.benchId !== this.state.bench_id) {
-      this.setState({ bench_id: this.props.benchId });
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.setState({ bench_id: this.props.match.params.id });
     }
   }
 
@@ -24,27 +25,19 @@ export default class ReviewForm extends React.Component {
 
     if (this.props.loggedIn) {
       this.props.createReview(this.state);
-      this.setState(this.state = { bench_id: this.props.benchId, comment: '', rating: '' });
+      this.setState(this.state = { comment: '', rating: '' });
     }
-  }
-
-  displayErrors() {
-    return (
-      <div className="errors">
-        {this.props.errors.join(', ')}
-      </div>
-    )
   }
 
   render() {
     const disabled = this.props.loggedIn ? '' : 'disabled';
-    const msg = this.props.loggedIn ? '' : 'Log in to submit a review.';
+    const msg = this.props.loggedIn ? '' : 'Please log in to submit a review.';
 
     return (
-      <form>
+      <form className="review">
         <h2>Review Bench</h2>
-        {this.displayErrors()}
-        {msg}
+        <DisplayErrors errors={this.props.errors} />
+        { msg }
 
         <label htmlFor="rating">Rating (1 - 5)</label>
         <input 
@@ -70,3 +63,5 @@ export default class ReviewForm extends React.Component {
     );
   }
 }
+
+export default withRouter(ReviewForm);

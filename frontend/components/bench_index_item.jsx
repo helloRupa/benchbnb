@@ -7,11 +7,11 @@ const BenchIndexItem = ({ bench, history }) => {
   };
 
   return (
-    <div className="bench-index-item" key={bench.id} onClick={goToBench} >
-      <p>{bench.description}</p>
-      <p>Score: {bench.rating}</p>
-      <p>{bench.seating} seats</p>
-    </div>
+    <ul className="bench-index-item" key={bench.id} onClick={goToBench} >
+      <li>{bench.description}</li>
+      <li>Score: {bench.rating}</li>
+      <li>{bench.seating} seats</li>
+    </ul>
   );
 };
 

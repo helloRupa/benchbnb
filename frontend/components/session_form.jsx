@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import DisplayErrors from './display_errors';
 
 export default class SessionForm extends React.Component {
   constructor(props) {
@@ -7,7 +8,6 @@ export default class SessionForm extends React.Component {
     this.state = { username: '', password: '' };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.displayErrors = this.displayErrors.bind(this);
   }
 
   handleChange(e) {
@@ -20,27 +20,24 @@ export default class SessionForm extends React.Component {
     this.props.processForm(user);
   }
 
-  displayErrors() {
-    return <div className="errors">{this.props.errors.join(', ')}</div>;
-  }
-
   render() {
     const formTypeText = (this.props.formType === 'signup') ? 'Sign Up' : 'Log In';
+
     const link = (this.props.formType === 'signup') ? (
-      <div>
+      <div className="session-link">
         Already have an account? <Link to='/login'>Log In!</Link>
       </div>
     ) : (
-      <div>
+      <div className="session-link">
         Need an account? <Link to='/signup'>Sign Up!</Link>
       </div>
     );
 
     return (
-      <form>
+      <form className="login">
         <h1>{formTypeText}</h1>
-        {link}
-        {this.displayErrors()}
+        { link }
+        <DisplayErrors errors={this.props.errors} />
 
         <label htmlFor="username">Username:</label>
         <input 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import DisplayErrors from './display_errors';
 
 class BenchForm extends React.Component {
   constructor(props) {
@@ -12,7 +13,6 @@ class BenchForm extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.displayErrors = this.displayErrors.bind(this);
   }
 
   handleChange(e) {
@@ -26,45 +26,37 @@ class BenchForm extends React.Component {
       .then(() => this.props.history.push('/'));
   }
 
-  displayErrors() {
-    return (
-      <div className="errors">
-        {this.props.errors.join(', ')}
-      </div>
-    )
-  }
-
   render() {
     return (
-    <form>
-      <Link to="/">{"<<"} Back to benches</Link>
-      {this.displayErrors()}
-      <label htmlFor="lat">Latitude:</label>
-      <input type="text" name="lat" id="lat" value={this.state.lat} disabled />
+      <form className="new-bench">
+        <Link to="/">{"<<"} Back to benches</Link>
+        <DisplayErrors errors={this.props.errors} />
+        <label htmlFor="lat">Latitude:</label>
+        <input type="text" name="lat" id="lat" value={this.state.lat} disabled />
 
-      <label htmlFor="lng">Longitude:</label>
-      <input type="text" name="lng" id="lng" value={this.state.lng} disabled />
+        <label htmlFor="lng">Longitude:</label>
+        <input type="text" name="lng" id="lng" value={this.state.lng} disabled />
 
-      <label htmlFor="description">Description</label>
-      <input 
-        type="text" 
-        name="description" 
-        id="description" 
-        value={this.state.description}
-        onChange={this.handleChange} />
+        <label htmlFor="description">Description</label>
+        <input 
+          type="text" 
+          name="description" 
+          id="description" 
+          value={this.state.description}
+          onChange={this.handleChange} />
 
-      <label htmlFor="seating">Number of Seats</label>
-      <input 
-        type="number"
-        name="seating"
-        id="seating"
-        min="1"
-        max="1000"
-        value={this.state.seating}
-        onChange={this.handleChange} />
+        <label htmlFor="seating">Number of Seats</label>
+        <input 
+          type="number"
+          name="seating"
+          id="seating"
+          min="1"
+          max="1000"
+          value={this.state.seating}
+          onChange={this.handleChange} />
 
         <input type="submit" onClick={this.handleSubmit} />
-    </form>
+      </form>
     );
   }
 }

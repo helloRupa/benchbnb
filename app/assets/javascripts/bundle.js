@@ -238,7 +238,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_SEATING", function() { return UPDATE_SEATING; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateBounds", function() { return updateBounds; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateSeating", function() { return updateSeating; });
-// import { fetchBenches } from './bench_actions';
 var UPDATE_BOUNDS = 'UPDATE_BOUNDS';
 var UPDATE_SEATING = 'UPDATE_SEATING';
 var updateBounds = function updateBounds(bounds) {
@@ -253,10 +252,7 @@ var updateSeating = function updateSeating(seating) {
     min_seating: seating.min_seating,
     max_seating: seating.max_seating
   };
-}; // export const updateBounds = (bounds, filters) => (dispatch) => {
-//   dispatch(uBounds(bounds));
-//   return fetchBenches(filters)(dispatch);
-// };
+};
 
 /***/ }),
 
@@ -380,6 +376,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _display_errors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./display_errors */ "./frontend/components/display_errors.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -403,6 +400,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var BenchForm =
 /*#__PURE__*/
 function (_React$Component) {
@@ -422,7 +420,6 @@ function (_React$Component) {
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
-    _this.displayErrors = _this.displayErrors.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -442,18 +439,15 @@ function (_React$Component) {
       });
     }
   }, {
-    key: "displayErrors",
-    value: function displayErrors() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "errors"
-      }, this.props.errors.join(', '));
-    }
-  }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "new-bench"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/"
-      }, "<<", " Back to benches"), this.displayErrors(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      }, "<<", " Back to benches"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_errors__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        errors: this.props.errors
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "lat"
       }, "Latitude:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
@@ -636,11 +630,11 @@ var BenchIndexItem = function BenchIndexItem(_ref) {
     history.push("/benches/".concat(bench.id));
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     className: "bench-index-item",
     key: bench.id,
     onClick: goToBench
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, bench.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Score: ", bench.rating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, bench.seating, " seats"));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Score: ", bench.rating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.seating, " seats"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(BenchIndexItem));
@@ -841,9 +835,7 @@ function (_React$Component) {
       }, "<<", " Back to benches"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_single_bench_map__WEBPACK_IMPORTED_MODULE_1__["default"], {
         lat: bench.lat,
         lng: bench.lng
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Score: ", bench.rating, " (Based on ", bench.num_reviews, " reviews)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.seating, " seats"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Latitude: ", bench.lat), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Longitude: ", bench.lng)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        benchId: bench.id
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Score: ", bench.rating, " (", bench.num_reviews, " reviews)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.seating, " seats"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Latitude: ", bench.lat), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Longitude: ", bench.lng)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews__WEBPACK_IMPORTED_MODULE_4__["default"], {
         reviews: this.props.reviews
       }));
     }
@@ -892,6 +884,34 @@ var mapDispatch = function mapDispatch(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapState, mapDispatch)(_bench_show__WEBPACK_IMPORTED_MODULE_2__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/display_errors.jsx":
+/*!************************************************!*\
+  !*** ./frontend/components/display_errors.jsx ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var DisplayErrors = function DisplayErrors(_ref) {
+  var errors = _ref.errors;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "errors"
+  }, errors.map(function (err, idx) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: idx
+    }, err);
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (DisplayErrors);
 
 /***/ }),
 
@@ -962,7 +982,9 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "seating"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "minSeating"
       }, "Min. Seats"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "number",
@@ -1012,14 +1034,16 @@ __webpack_require__.r(__webpack_exports__);
 var Greeting = function Greeting(_ref) {
   var currentUser = _ref.currentUser,
       logout = _ref.logout;
-  var greeting = currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Welcome ", currentUser.username, "!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  var greeting = currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Hi ", currentUser.username, "!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: logout
   }, "Logout")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/signup"
   }, "Sign Up"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/login"
   }, "Log In"));
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, greeting);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "greeting"
+  }, greeting);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Greeting);
@@ -1108,9 +1132,10 @@ var mapDispatch = function mapDispatch(dispatch) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ReviewForm; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _display_errors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./display_errors */ "./frontend/components/display_errors.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1133,6 +1158,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
 var ReviewForm =
 /*#__PURE__*/
 function (_React$Component) {
@@ -1145,11 +1172,10 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ReviewForm).call(this, props));
     _this.state = {
-      bench_id: _this.props.benchId,
+      bench_id: _this.props.match.params.id,
       comment: '',
       rating: ''
     };
-    _this.displayErrors = _this.displayErrors.bind(_assertThisInitialized(_this));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
@@ -1158,9 +1184,9 @@ function (_React$Component) {
   _createClass(ReviewForm, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      if (prevProps.benchId !== this.state.bench_id) {
+      if (prevProps.match.params.id !== this.props.match.params.id) {
         this.setState({
-          bench_id: this.props.benchId
+          bench_id: this.props.match.params.id
         });
       }
     }
@@ -1177,25 +1203,21 @@ function (_React$Component) {
       if (this.props.loggedIn) {
         this.props.createReview(this.state);
         this.setState(this.state = {
-          bench_id: this.props.benchId,
           comment: '',
           rating: ''
         });
       }
     }
   }, {
-    key: "displayErrors",
-    value: function displayErrors() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "errors"
-      }, this.props.errors.join(', '));
-    }
-  }, {
     key: "render",
     value: function render() {
       var disabled = this.props.loggedIn ? '' : 'disabled';
-      var msg = this.props.loggedIn ? '' : 'Log in to submit a review.';
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Review Bench"), this.displayErrors(), msg, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      var msg = this.props.loggedIn ? '' : 'Please log in to submit a review.';
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "review"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Review Bench"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_errors__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        errors: this.props.errors
+      }), msg, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "rating"
       }, "Rating (1 - 5)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "number",
@@ -1226,7 +1248,7 @@ function (_React$Component) {
   return ReviewForm;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(ReviewForm));
 
 /***/ }),
 
@@ -1284,10 +1306,16 @@ var Reviews = function Reviews(_ref) {
   var reviews = _ref.reviews;
 
   var showReview = function showReview(review) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, review.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, review.date), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, review.rating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, review.comment));
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, review.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "date"
+    }, review.date), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: "rating"
+    }, review.rating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, review.comment));
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, reviews.map(function (review) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "reviews"
+  }, reviews.map(function (review) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: review.id
     }, showReview(review));
@@ -1323,8 +1351,7 @@ var Search = function Search(_ref) {
       updateBounds = _ref.updateBounds,
       updateSeating = _ref.updateSeating,
       benchesObj = _ref.benchesObj,
-      filters = _ref.filters,
-      showBench = _ref.showBench;
+      filters = _ref.filters;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "search"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_bench_map__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -1403,6 +1430,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _display_errors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./display_errors */ "./frontend/components/display_errors.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1426,6 +1454,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var SessionForm =
 /*#__PURE__*/
 function (_React$Component) {
@@ -1443,7 +1472,6 @@ function (_React$Component) {
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
-    _this.displayErrors = _this.displayErrors.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1460,22 +1488,23 @@ function (_React$Component) {
       this.props.processForm(user);
     }
   }, {
-    key: "displayErrors",
-    value: function displayErrors() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "errors"
-      }, this.props.errors.join(', '));
-    }
-  }, {
     key: "render",
     value: function render() {
       var formTypeText = this.props.formType === 'signup' ? 'Sign Up' : 'Log In';
-      var link = this.props.formType === 'signup' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Already have an account? ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      var link = this.props.formType === 'signup' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "session-link"
+      }, "Already have an account? ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/login"
-      }, "Log In!")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Need an account? ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }, "Log In!")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "session-link"
+      }, "Need an account? ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/signup"
       }, "Sign Up!"));
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, formTypeText), link, this.displayErrors(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "login"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, formTypeText), link, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_errors__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        errors: this.props.errors
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "username"
       }, "Username:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",

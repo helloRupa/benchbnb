@@ -27,13 +27,13 @@ export default class BenchShow extends React.Component {
 
         <ul>
           <li>{bench.description}</li>
-          <li>Score: {bench.rating} (Based on {bench.num_reviews} reviews)</li>
+          <li>Score: {bench.rating} ({bench.num_reviews} reviews)</li>
           <li>{bench.seating} seats</li>
           <li>Latitude: {bench.lat}</li>
           <li>Longitude: {bench.lng}</li>
         </ul>
 
-        <ReviewFormContainer benchId={bench.id} />
+        <ReviewFormContainer />
 
         <Reviews reviews={this.props.reviews} />
       </section>
