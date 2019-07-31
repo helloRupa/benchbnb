@@ -3,7 +3,9 @@ import BenchIndexItem from './bench_index_item';
 
 export default class BenchIndex extends React.Component {
   componentDidMount() {
-    this.props.fetchBenches(this.props.filters);
+    if (Object.keys(this.props.filters.bounds).length > 0) {
+      this.props.fetchBenches(this.props.filters);
+    }
   }
 
   componentDidUpdate(prevProps) {

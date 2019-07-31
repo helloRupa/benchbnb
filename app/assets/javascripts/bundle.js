@@ -635,7 +635,9 @@ function (_React$Component) {
   _createClass(BenchIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchBenches(this.props.filters);
+      if (Object.keys(this.props.filters.bounds).length > 0) {
+        this.props.fetchBenches(this.props.filters);
+      }
     }
   }, {
     key: "componentDidUpdate",
