@@ -33,6 +33,7 @@ export default class BenchShow extends React.Component {
         <SingleBenchMap lat={bench.lat} lng={bench.lng} />
 
         <ul>
+          <img src={bench.image} />
           <li>{bench.description}</li>
           <li>Score: {bench.rating} ({bench.num_reviews} reviews)</li>
           <li>{bench.seating} seats</li>

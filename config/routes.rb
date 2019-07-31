@@ -10,5 +10,5 @@ Rails.application.routes.draw do
 
   root 'static_pages#root'
 
-  get "*path", to: redirect('/#/404')
+  get "/*anything", to: redirect('/#/404'), constraints: lambda { |request| !request.path_parameters[:anything].start_with?('rails/') }
 end
