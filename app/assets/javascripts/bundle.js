@@ -209,7 +209,8 @@ var fetchBenches = function fetchBenches(filters) {
 var createBench = function createBench(bench) {
   return function (dispatch) {
     return _util_bench_api_util__WEBPACK_IMPORTED_MODULE_0__["createBench"](bench).then(function (bench) {
-      return dispatch(receiveBench(bench));
+      dispatch(receiveBench(bench));
+      return bench;
     }, function (errors) {
       return dispatch(receiveErrors(errors.responseJSON));
     });
@@ -420,10 +421,12 @@ function (_React$Component) {
       description: '',
       lat: _this.props.lat,
       lng: _this.props.lng,
-      seating: ''
+      seating: '',
+      photo: ''
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -433,13 +436,34 @@ function (_React$Component) {
       this.setState(_defineProperty({}, e.currentTarget.name, e.currentTarget.value));
     }
   }, {
+    key: "handleFile",
+    value: function handleFile(e) {
+      var file = e.currentTarget.files[0];
+
+      if (file.type.startsWith('image')) {
+        this.setState({
+          photo: file
+        });
+      }
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       var _this2 = this;
 
       e.preventDefault();
-      this.props.createBench(this.state).then(function () {
-        return _this2.props.history.push('/');
+      var formData = new FormData();
+      formData.append('bench[description]', this.state.description);
+      formData.append('bench[lat]', this.state.lat);
+      formData.append('bench[lng]', this.state.lng);
+      formData.append('bench[seating]', this.state.seating);
+
+      if (this.state.photo) {
+        formData.append('bench[photo]', this.state.photo);
+      }
+
+      this.props.createBench(formData).then(function (bench) {
+        return _this2.props.history.push("/benches/".concat(bench.id));
       });
     }
   }, {
@@ -485,6 +509,13 @@ function (_React$Component) {
         max: "1000",
         value: this.state.seating,
         onChange: this.handleChange
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "file"
+      }, "Upload Image"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "file",
+        id: "file",
+        accept: ".jpg,.png,.gif,.jpeg",
+        onChange: this.handleFile
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         onClick: this.handleSubmit
@@ -2222,14 +2253,23 @@ var fetchBenches = function fetchBenches(filters) {
     url: 'api/benches',
     data: filters
   });
-};
-var createBench = function createBench(bench) {
+}; // export const createBench = (bench) => {
+//   return $.ajax({
+//     method: 'POST',
+//     url: 'api/benches',
+//     data: { bench },
+//     contentType: false,
+//     processData: false,
+//   });
+// };
+
+var createBench = function createBench(formData) {
   return $.ajax({
+    url: '/api/benches',
     method: 'POST',
-    url: 'api/benches',
-    data: {
-      bench: bench
-    }
+    data: formData,
+    contentType: false,
+    processData: false
   });
 };
 var showBench = function showBench(id) {

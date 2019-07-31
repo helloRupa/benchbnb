@@ -36,7 +36,10 @@ export const fetchBenches = (filters) => (dispatch) => {
 export const createBench = (bench) => (dispatch) => {
   return APIUtil.createBench(bench)
     .then(
-      (bench) => dispatch(receiveBench(bench)),
+      (bench) => { 
+        dispatch(receiveBench(bench));
+        return bench;
+      },
       (errors) => dispatch(receiveErrors(errors.responseJSON))
     );
 };

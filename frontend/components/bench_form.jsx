@@ -10,20 +10,41 @@ class BenchForm extends React.Component {
       lat: this.props.lat,
       lng: this.props.lng,
       seating: '',
+      photo: '',
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFile = this.handleFile.bind(this);
   }
 
   handleChange(e) {
     this.setState({ [e.currentTarget.name]: e.currentTarget.value });
   }
 
+  handleFile(e) {
+    const file = e.currentTarget.files[0];
+
+    if (file.type.startsWith('image')) {
+      this.setState({ photo: file });
+    }
+  }
+
   handleSubmit(e) {
     e.preventDefault();
 
-    this.props.createBench(this.state)
-      .then(() => this.props.history.push('/'));
+    const formData = new FormData();
+
+    formData.append('bench[description]', this.state.description);
+    formData.append('bench[lat]', this.state.lat);
+    formData.append('bench[lng]', this.state.lng);
+    formData.append('bench[seating]', this.state.seating);
+
+    if (this.state.photo) {
+      formData.append('bench[photo]', this.state.photo);
+    }
+
+    this.props.createBench(formData)
+      .then((bench) => this.props.history.push(`/benches/${bench.id}`));
   }
 
   render() {
@@ -54,6 +75,9 @@ class BenchForm extends React.Component {
           max="1000"
           value={this.state.seating}
           onChange={this.handleChange} />
+
+        <label htmlFor="file">Upload Image</label>
+        <input type="file" id="file" accept=".jpg,.png,.gif,.jpeg" onChange={this.handleFile} />
 
         <input type="submit" onClick={this.handleSubmit} />
       </form>
