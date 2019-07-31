@@ -4,6 +4,8 @@ class Bench < ApplicationRecord
 
   has_many :reviews
 
+  has_one_attached :photo
+
   def add_review(review)
     self.num_reviews += 1
     self.review_total += review.rating
