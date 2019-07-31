@@ -1,4 +1,5 @@
 import * as APIUtil from '../util/bench_api_util';
+import { loading, doneLoading } from './loading_actions';
 
 export const RECEIVE_BENCHES = 'RECEIVE_BENCHES';
 export const RECEIVE_BENCH = 'RECEIVE_BENCH';
@@ -26,14 +27,19 @@ export const receiveSingleBench = (bench) => ({
 });
 
 export const fetchBenches = (filters) => (dispatch) => {
+  dispatch(loading);
+
   return APIUtil.fetchBenches(filters)
     .then(
       (benches) => dispatch(receiveBenches(benches.benches)),
       (errors) => dispatch(receiveErrors(errors.responseJSON))
-    );
+    )
+    .always(() => dispatch(doneLoading));
 };
 
 export const createBench = (bench) => (dispatch) => {
+  dispatch(loading);
+
   return APIUtil.createBench(bench)
     .then(
       (bench) => { 
@@ -41,10 +47,13 @@ export const createBench = (bench) => (dispatch) => {
         return bench;
       },
       (errors) => dispatch(receiveErrors(errors.responseJSON))
-    );
+    )
+    .always(() => dispatch(doneLoading));
 };
 
 export const showBench = (id) => (dispatch) => {
+  dispatch(loading);
+
   return APIUtil.showBench(id)
     .then(
       (bench) => {
@@ -55,5 +64,6 @@ export const showBench = (id) => (dispatch) => {
         dispatch(receiveErrors(errors.responseJSON));
         $.Deferred().reject(errors);
       }
-    );
+    )
+    .always(() => dispatch(doneLoading));
 };

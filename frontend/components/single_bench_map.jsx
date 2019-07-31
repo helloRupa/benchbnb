@@ -8,9 +8,11 @@ class SingleBenchMap extends React.Component {
       draggable: false,
     };
 
-    this.map = new google.maps.Map(this.mapNode, mapOptions);   
-    const pos = new google.maps.LatLng(this.props.lat, this.props.lng);
-    new google.maps.Marker({ position: pos, map: this.map });
+    if (this.props.lat != undefined) {
+      this.map = new google.maps.Map(this.mapNode, mapOptions);   
+      const pos = new google.maps.LatLng(this.props.lat, this.props.lng);
+      new google.maps.Marker({ position: pos, map: this.map });
+    }
   }
 
   render() {

@@ -106,6 +106,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_bench_form_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/bench_form_container */ "./frontend/components/bench_form_container.js");
 /* harmony import */ var _components_bench_show_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/bench_show_container */ "./frontend/components/bench_show_container.js");
 /* harmony import */ var _components_not_found_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/not_found.jsx */ "./frontend/components/not_found.jsx");
+/* harmony import */ var _components_loading_container__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/loading_container */ "./frontend/components/loading_container.js");
+
 
 
 
@@ -118,7 +120,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Bench BnB"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_greeting_container__WEBPACK_IMPORTED_MODULE_1__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Bench BnB"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_greeting_container__WEBPACK_IMPORTED_MODULE_1__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_loading_container__WEBPACK_IMPORTED_MODULE_10__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
     path: "/login",
     component: _components_login_form_container__WEBPACK_IMPORTED_MODULE_3__["default"],
     exact: true
@@ -168,6 +170,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createBench", function() { return createBench; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showBench", function() { return showBench; });
 /* harmony import */ var _util_bench_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/bench_api_util */ "./frontend/util/bench_api_util.js");
+/* harmony import */ var _loading_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./loading_actions */ "./frontend/actions/loading_actions.js");
+
 
 var RECEIVE_BENCHES = 'RECEIVE_BENCHES';
 var RECEIVE_BENCH = 'RECEIVE_BENCH';
@@ -199,31 +203,40 @@ var receiveSingleBench = function receiveSingleBench(bench) {
 };
 var fetchBenches = function fetchBenches(filters) {
   return function (dispatch) {
+    dispatch(_loading_actions__WEBPACK_IMPORTED_MODULE_1__["loading"]);
     return _util_bench_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchBenches"](filters).then(function (benches) {
       return dispatch(receiveBenches(benches.benches));
     }, function (errors) {
       return dispatch(receiveErrors(errors.responseJSON));
+    }).always(function () {
+      return dispatch(_loading_actions__WEBPACK_IMPORTED_MODULE_1__["doneLoading"]);
     });
   };
 };
 var createBench = function createBench(bench) {
   return function (dispatch) {
+    dispatch(_loading_actions__WEBPACK_IMPORTED_MODULE_1__["loading"]);
     return _util_bench_api_util__WEBPACK_IMPORTED_MODULE_0__["createBench"](bench).then(function (bench) {
       dispatch(receiveBench(bench));
       return bench;
     }, function (errors) {
       return dispatch(receiveErrors(errors.responseJSON));
+    }).always(function () {
+      return dispatch(_loading_actions__WEBPACK_IMPORTED_MODULE_1__["doneLoading"]);
     });
   };
 };
 var showBench = function showBench(id) {
   return function (dispatch) {
+    dispatch(_loading_actions__WEBPACK_IMPORTED_MODULE_1__["loading"]);
     return _util_bench_api_util__WEBPACK_IMPORTED_MODULE_0__["showBench"](id).then(function (bench) {
       dispatch(receiveSingleBench(bench));
       return bench;
     }, function (errors) {
       dispatch(receiveErrors(errors.responseJSON));
       $.Deferred().reject(errors);
+    }).always(function () {
+      return dispatch(_loading_actions__WEBPACK_IMPORTED_MODULE_1__["doneLoading"]);
     });
   };
 };
@@ -1181,6 +1194,55 @@ var mapDispatch = function mapDispatch(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/loading.jsx":
+/*!*****************************************!*\
+  !*** ./frontend/components/loading.jsx ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var Loading = function Loading(_ref) {
+  var loading = _ref.loading;
+  var loadScreen = loading ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "loading"
+  }, "Content is loading") : '';
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, loadScreen);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Loading);
+
+/***/ }),
+
+/***/ "./frontend/components/loading_container.js":
+/*!**************************************************!*\
+  !*** ./frontend/components/loading_container.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _loading__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./loading */ "./frontend/components/loading.jsx");
+
+
+
+var mapState = function mapState(state) {
+  return {
+    loading: state.ui.loading
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapState)(_loading__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
 /***/ "./frontend/components/login_form_container.js":
 /*!*****************************************************!*\
   !*** ./frontend/components/login_form_container.js ***!
@@ -1750,12 +1812,15 @@ function (_React$Component) {
         zoom: 13,
         draggable: false
       };
-      this.map = new google.maps.Map(this.mapNode, mapOptions);
-      var pos = new google.maps.LatLng(this.props.lat, this.props.lng);
-      new google.maps.Marker({
-        position: pos,
-        map: this.map
-      });
+
+      if (this.props.lat != undefined) {
+        this.map = new google.maps.Map(this.mapNode, mapOptions);
+        var pos = new google.maps.LatLng(this.props.lat, this.props.lng);
+        new google.maps.Marker({
+          position: pos,
+          map: this.map
+        });
+      }
     }
   }, {
     key: "render",
