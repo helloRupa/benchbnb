@@ -422,7 +422,8 @@ function (_React$Component) {
       lat: _this.props.lat,
       lng: _this.props.lng,
       seating: '',
-      photo: ''
+      photo: '',
+      photoUrl: ''
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -438,18 +439,35 @@ function (_React$Component) {
   }, {
     key: "handleFile",
     value: function handleFile(e) {
-      var file = e.currentTarget.files[0];
+      var _this2 = this;
 
-      if (file.type.startsWith('image')) {
-        this.setState({
-          photo: file
+      var file = e.currentTarget.files[0];
+      var fileReader = new FileReader();
+
+      fileReader.onloadend = function () {
+        if (file.type.startsWith('image')) {
+          _this2.setState({
+            photo: file,
+            photoUrl: fileReader.result
+          });
+        }
+      };
+
+      fileReader.readAsDataURL(file);
+    }
+  }, {
+    key: "preview",
+    value: function preview() {
+      if (this.state.photoUrl != '') {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: this.state.photoUrl
         });
       }
     }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      var _this2 = this;
+      var _this3 = this;
 
       e.preventDefault();
       var formData = new FormData();
@@ -463,7 +481,7 @@ function (_React$Component) {
       }
 
       this.props.createBench(formData).then(function (bench) {
-        return _this2.props.history.push("/benches/".concat(bench.id));
+        return _this3.props.history.push("/benches/".concat(bench.id));
       });
     }
   }, {
@@ -516,7 +534,7 @@ function (_React$Component) {
         id: "file",
         accept: ".jpg,.png,.gif,.jpeg",
         onChange: this.handleFile
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), this.preview(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         onClick: this.handleSubmit
       }));

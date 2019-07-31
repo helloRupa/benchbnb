@@ -11,6 +11,7 @@ class BenchForm extends React.Component {
       lng: this.props.lng,
       seating: '',
       photo: '',
+      photoUrl: '',
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,9 +24,20 @@ class BenchForm extends React.Component {
 
   handleFile(e) {
     const file = e.currentTarget.files[0];
+    const fileReader = new FileReader();
 
-    if (file.type.startsWith('image')) {
-      this.setState({ photo: file });
+    fileReader.onloadend = () => {
+      if (file.type.startsWith('image')) {
+        this.setState({ photo: file, photoUrl: fileReader.result });
+      }
+    };
+
+    fileReader.readAsDataURL(file);
+  }
+
+  preview() {
+    if (this.state.photoUrl != '') {
+      return <img src={this.state.photoUrl} />;
     }
   }
 
@@ -78,6 +90,7 @@ class BenchForm extends React.Component {
 
         <label htmlFor="file">Upload Image</label>
         <input type="file" id="file" accept=".jpg,.png,.gif,.jpeg" onChange={this.handleFile} />
+        {this.preview()}
 
         <input type="submit" onClick={this.handleSubmit} />
       </form>
