@@ -6,14 +6,21 @@ import Reviews from './reviews';
 
 export default class BenchShow extends React.Component {
 
+  fetchBench() {
+    this.props.showBench(this.props.match.params.id)
+      .fail((err) => {
+        this.props.history.push('/404');
+        console.log('Bench does not exist');
+    });
+  }
+
   componentDidMount() {
-    this.props.showBench(this.props.match.params.id);
+    this.fetchBench();
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.match.params.id !== this.props.match.params.id) {
-      this.props.showBench(this.props.match.params.id)
-        .fail((err) => this.props.history.push('/'));
+      this.fetchBench();
     }
   }
 

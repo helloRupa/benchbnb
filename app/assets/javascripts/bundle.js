@@ -105,6 +105,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_search_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/search_container */ "./frontend/components/search_container.js");
 /* harmony import */ var _components_bench_form_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/bench_form_container */ "./frontend/components/bench_form_container.js");
 /* harmony import */ var _components_bench_show_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/bench_show_container */ "./frontend/components/bench_show_container.js");
+/* harmony import */ var _components_not_found_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/not_found.jsx */ "./frontend/components/not_found.jsx");
+
 
 
 
@@ -116,7 +118,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Bench BnB"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_greeting_container__WEBPACK_IMPORTED_MODULE_1__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Bench BnB"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_greeting_container__WEBPACK_IMPORTED_MODULE_1__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
     path: "/login",
     component: _components_login_form_container__WEBPACK_IMPORTED_MODULE_3__["default"],
     exact: true
@@ -124,18 +126,20 @@ var App = function App() {
     path: "/signup",
     component: _components_signup_form_container__WEBPACK_IMPORTED_MODULE_4__["default"],
     exact: true
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-    exact: true,
-    path: "/",
-    component: _components_search_container__WEBPACK_IMPORTED_MODULE_6__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["ProtectedRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["ProtectedRoute"], {
     path: "/benches/new",
     component: _components_bench_form_container__WEBPACK_IMPORTED_MODULE_7__["default"],
     exact: true
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-    path: "/benches/:id",
+    path: "/benches/:id(\\d+)",
     component: _components_bench_show_container__WEBPACK_IMPORTED_MODULE_8__["default"],
     exact: true
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+    exact: true,
+    path: "/",
+    component: _components_search_container__WEBPACK_IMPORTED_MODULE_6__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+    component: _components_not_found_jsx__WEBPACK_IMPORTED_MODULE_9__["default"]
   })));
 };
 
@@ -809,19 +813,26 @@ function (_React$Component) {
   }
 
   _createClass(BenchShow, [{
+    key: "fetchBench",
+    value: function fetchBench() {
+      var _this = this;
+
+      this.props.showBench(this.props.match.params.id).fail(function (err) {
+        _this.props.history.push('/404');
+
+        console.log('Bench does not exist');
+      });
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.showBench(this.props.match.params.id);
+      this.fetchBench();
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      var _this = this;
-
       if (prevProps.match.params.id !== this.props.match.params.id) {
-        this.props.showBench(this.props.match.params.id).fail(function (err) {
-          return _this.props.history.push('/');
-        });
+        this.fetchBench();
       }
     }
   }, {
@@ -1120,6 +1131,34 @@ var mapDispatch = function mapDispatch(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapState, mapDispatch)(_session_form__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/not_found.jsx":
+/*!*******************************************!*\
+  !*** ./frontend/components/not_found.jsx ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+var NotFound = function NotFound() {
+  var message = ['Got your nose! Now get outta here!', 'And you may ask yourself, well how did I get here?', 'You broke the Internet. Time to play outside.', 'Sorry, no cat videos here. Better move on.', 'Ain\'t nodbody got time for this!'][Math.floor(Math.random() * 5)];
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    className: "404"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "404: Page or Bench Not Found"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, message), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/"
+  }, "Go home if you want."));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (NotFound);
 
 /***/ }),
 
@@ -1670,21 +1709,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
 /* harmony import */ var _root__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./root */ "./frontend/root.jsx");
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var _actions_bench_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./actions/bench_actions */ "./frontend/actions/bench_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
-
-/* TEST CODE DELETE WHEN DONE */
-
-
-
-window.Bactions = _actions_bench_actions__WEBPACK_IMPORTED_MODULE_5__;
-window.Actions = _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__;
-/* END TEST CODE DELETE WHEN DONE */
 
 document.addEventListener('DOMContentLoaded', function () {
   var preloadedState = undefined;
@@ -1702,12 +1731,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var store = Object(_store_store__WEBPACK_IMPORTED_MODULE_2__["default"])(preloadedState);
   delete window.currentUser;
-  /* TEST CODE DELETE WHEN DONE */
-
-  window.getState = store.getState;
-  window.dispatch = store.dispatch;
-  /* DELETE ABOVE WHEN DONE */
-
   var root = document.getElementById('root');
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_root__WEBPACK_IMPORTED_MODULE_3__["default"], {
     store: store
@@ -1740,6 +1763,7 @@ var benchErrorsReducers = function benchErrorsReducers() {
 
     case _actions_bench_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BENCH"]:
     case _actions_bench_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BENCHES"]:
+    case _actions_bench_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SINGLE_BENCH"]:
     case _actions_review_actions__WEBPACK_IMPORTED_MODULE_1__["ADD_REVIEW"]:
       return [];
 
