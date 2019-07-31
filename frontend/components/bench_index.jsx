@@ -2,6 +2,10 @@ import React from 'react';
 import BenchIndexItem from './bench_index_item';
 
 export default class BenchIndex extends React.Component {
+  componentDidMount() {
+    this.props.fetchBenches(this.props.filters);
+  }
+
   componentDidUpdate(prevProps) {
     if (JSON.stringify(prevProps.filters) !== JSON.stringify(this.props.filters)) {
       this.props.fetchBenches(this.props.filters);

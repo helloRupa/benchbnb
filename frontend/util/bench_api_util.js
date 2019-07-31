@@ -6,16 +6,6 @@ export const fetchBenches = (filters) => {
   });
 };
 
-// export const createBench = (bench) => {
-//   return $.ajax({
-//     method: 'POST',
-//     url: 'api/benches',
-//     data: { bench },
-//     contentType: false,
-//     processData: false,
-//   });
-// };
-
 export const createBench = (formData) => {
   return $.ajax({
     url: '/api/benches',

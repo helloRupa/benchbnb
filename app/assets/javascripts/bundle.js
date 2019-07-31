@@ -633,6 +633,11 @@ function (_React$Component) {
   }
 
   _createClass(BenchIndex, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchBenches(this.props.filters);
+    }
+  }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       if (JSON.stringify(prevProps.filters) !== JSON.stringify(this.props.filters)) {
@@ -1812,7 +1817,7 @@ var benchErrorsReducers = function benchErrorsReducers() {
 
   switch (action.type) {
     case _actions_bench_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BENCH_ERRORS"]:
-      return action.errors;
+      return action.errors || [];
 
     case _actions_bench_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BENCH"]:
     case _actions_bench_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_BENCHES"]:
@@ -2273,16 +2278,7 @@ var fetchBenches = function fetchBenches(filters) {
     url: 'api/benches',
     data: filters
   });
-}; // export const createBench = (bench) => {
-//   return $.ajax({
-//     method: 'POST',
-//     url: 'api/benches',
-//     data: { bench },
-//     contentType: false,
-//     processData: false,
-//   });
-// };
-
+};
 var createBench = function createBench(formData) {
   return $.ajax({
     url: '/api/benches',
