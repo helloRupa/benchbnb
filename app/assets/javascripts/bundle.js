@@ -261,6 +261,30 @@ var updateSeating = function updateSeating(seating) {
 
 /***/ }),
 
+/***/ "./frontend/actions/loading_actions.js":
+/*!*********************************************!*\
+  !*** ./frontend/actions/loading_actions.js ***!
+  \*********************************************/
+/*! exports provided: LOADING, DONE_LOADING, loading, doneLoading */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOADING", function() { return LOADING; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DONE_LOADING", function() { return DONE_LOADING; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loading", function() { return loading; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doneLoading", function() { return doneLoading; });
+var LOADING = 'LOADING';
+var DONE_LOADING = 'DONE_LOADING';
+var loading = {
+  type: LOADING
+};
+var doneLoading = {
+  type: DONE_LOADING
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/review_actions.js":
 /*!********************************************!*\
   !*** ./frontend/actions/review_actions.js ***!
@@ -1968,6 +1992,38 @@ var filterReducer = function filterReducer() {
 
 /***/ }),
 
+/***/ "./frontend/reducers/loading_reducer.js":
+/*!**********************************************!*\
+  !*** ./frontend/reducers/loading_reducer.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_loading_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/loading_actions */ "./frontend/actions/loading_actions.js");
+
+
+var loadingReducer = function loadingReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_loading_actions__WEBPACK_IMPORTED_MODULE_0__["LOADING"]:
+      return true;
+
+    case _actions_loading_actions__WEBPACK_IMPORTED_MODULE_0__["DONE_LOADING"]:
+      return false;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (loadingReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/root_reducer.js":
 /*!*******************************************!*\
   !*** ./frontend/reducers/root_reducer.js ***!
@@ -2162,10 +2218,13 @@ var singleBenchReducer = function singleBenchReducer() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _filter_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./filter_reducer */ "./frontend/reducers/filter_reducer.js");
+/* harmony import */ var _loading_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./loading_reducer */ "./frontend/reducers/loading_reducer.js");
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  filters: _filter_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  filters: _filter_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  loading: _loading_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 }));
 
 /***/ }),
