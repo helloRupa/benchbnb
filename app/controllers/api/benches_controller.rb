@@ -1,6 +1,6 @@
 class Api::BenchesController < ApplicationController
   def index
-    @benches = Bench.apply_filters(params[:bounds], params[:min_seating], params[:max_seating])
+    @benches = Bench.with_attached_photo.apply_filters(params[:bounds], params[:min_seating], params[:max_seating])
 
     render :index
   end

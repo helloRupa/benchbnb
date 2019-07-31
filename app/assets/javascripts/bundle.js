@@ -687,7 +687,9 @@ var BenchIndexItem = function BenchIndexItem(_ref) {
     className: "bench-index-item",
     key: bench.id,
     onClick: goToBench
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Score: ", bench.rating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.seating, " seats"));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: bench.image
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Score: ", bench.rating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.seating, " seats"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(BenchIndexItem));

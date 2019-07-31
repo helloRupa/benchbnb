@@ -21,22 +21,13 @@ class Bench < ApplicationRecord
     lats = [bounds['northEast']['lat'], bounds['southWest']['lat']].map(&:to_f).sort
     lngs = [bounds['northEast']['lng'], bounds['southWest']['lng']].map(&:to_f).sort
 
-    Bench.all.reduce([]) do |benches, bench|
-      if bench['lat'].between?(lats[0], lats[1]) && bench['lng'].between?(lngs[0], lngs[1])
-        benches << bench
-      end
-
-      benches
-    end
+    Bench.where(lat: lats[0]..lats[1], lng: lngs[0]..lngs[1])
   end
 
   def self.apply_filters(bounds, min_seating, max_seating)
     return Bench.in_bounds(bounds) unless Bench.seating_is_valid?(min_seating.to_i, max_seating.to_i)
 
-    Bench.in_bounds(bounds).reduce([]) do |benches, bench|
-      benches << bench if bench.seating.between?(min_seating.to_i, max_seating.to_i)
-      benches
-    end
+    Bench.in_bounds(bounds).where(seating: min_seating.to_i..max_seating.to_i)
   end
 
   private
