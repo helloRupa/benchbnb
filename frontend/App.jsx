@@ -1,6 +1,6 @@
 import React from 'react';
 import GreetingContainer from './components/greeting_container';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import LoginFormContainer from './components/login_form_container';
 import SignupFormContainer from './components/signup_form_container';
 import { AuthRoute, ProtectedRoute } from './util/route_util';
@@ -14,7 +14,7 @@ const App = () => {
   return (
     <div>
       <header>
-        <h1>Bench BnB</h1>
+        <Link to="/"><h1>Bench BnB</h1></Link>
         <GreetingContainer />
       </header>
 
