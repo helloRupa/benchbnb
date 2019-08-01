@@ -639,6 +639,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bench_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bench_index_item */ "./frontend/components/bench_index_item.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -647,9 +655,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -663,32 +671,123 @@ var BenchIndex =
 function (_React$Component) {
   _inherits(BenchIndex, _React$Component);
 
-  function BenchIndex() {
+  function BenchIndex(props) {
+    var _this;
+
     _classCallCheck(this, BenchIndex);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(BenchIndex).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(BenchIndex).call(this, props));
+    _this.state = {
+      sort: 'none',
+      benches: _toConsumableArray(_this.props.benches)
+    };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(BenchIndex, [{
+    key: "fetchBenches",
+    value: function fetchBenches() {
+      var _this2 = this;
+
+      this.props.fetchBenches(this.props.filters).then(function () {
+        return _this2.setState({
+          benches: _toConsumableArray(_this2.props.benches)
+        });
+      });
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       if (Object.keys(this.props.filters.bounds).length > 0) {
-        this.props.fetchBenches(this.props.filters);
+        this.fetchBenches();
       }
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       if (JSON.stringify(prevProps.filters) !== JSON.stringify(this.props.filters)) {
-        this.props.fetchBenches(this.props.filters);
+        this.fetchBenches();
       }
+    }
+  }, {
+    key: "sortAscending",
+    value: function sortAscending(value) {
+      this.setState({
+        benches: this.state.benches.sort(function (a, b) {
+          return a[value] - b[value];
+        })
+      });
+    }
+  }, {
+    key: "sortDescending",
+    value: function sortDescending(value) {
+      this.setState({
+        benches: this.state.benches.sort(function (a, b) {
+          return b[value] - a[value];
+        })
+      });
+    }
+  }, {
+    key: "sortBenches",
+    value: function sortBenches(value) {
+      switch (value) {
+        case 'rating-asc':
+          this.sortAscending('rating');
+          break;
+
+        case 'rating-desc':
+          this.sortDescending('rating');
+          break;
+
+        case 'seating-asc':
+          this.sortAscending('seating');
+          break;
+
+        case 'seating-desc':
+          this.sortDescending('seating');
+          break;
+
+        default:
+          this.setState({
+            benches: _toConsumableArray(this.props.benches)
+          });
+      }
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(e) {
+      var _this3 = this;
+
+      var value = e.currentTarget.value;
+      this.setState({
+        sort: value
+      }, function () {
+        _this3.sortBenches(value);
+      });
     }
   }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "benches"
-      }, this.props.benches.map(function (bench) {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        value: this.state.sort,
+        onChange: this.handleChange
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        disabled: true,
+        value: "none"
+      }, "Sort By:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "rating-asc"
+      }, "Rating \u2191"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "rating-desc"
+      }, "Rating \u2193"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "seating-asc"
+      }, "Seating \u2191"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "seating-desc"
+      }, "Seating \u2193"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "no-order"
+      }, "Default")), this.state.benches.map(function (bench) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_bench_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: bench.id,
           bench: bench
