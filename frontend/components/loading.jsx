@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Loading = ({ loading }) => {
-  const loadScreen = (loading) ? <div className="loading">Content is loading</div> : '';
+  const loadScreen = (loading) ? <div className="loading"><span>Benches are loading</span></div> : '';
 
   return (
     <div>

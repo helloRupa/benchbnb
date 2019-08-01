@@ -1,0 +1,9 @@
+.search {
+  padding: 30px 0;
+}
+
+@media all and (min-width: 450px) {
+  .search {
+    padding: 30px;
+  }
+}

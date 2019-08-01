@@ -19,6 +19,7 @@ export default class FilterForm extends React.Component {
   render() {
     return (
       <form className="seating">
+        <div>
         <label htmlFor="minSeating">Min. Seats</label>
         <input 
           type="number"
@@ -28,7 +29,9 @@ export default class FilterForm extends React.Component {
           max="100"
           value={this.state.min_seating}
           onChange={this.handleChange} />
+        </div>
 
+        <div>
         <label htmlFor="maxSeating">Max. Seats</label>
         <input 
           type="number"
@@ -38,6 +41,7 @@ export default class FilterForm extends React.Component {
           max="100"
           value={this.state.max_seating}
           onChange={this.handleChange} />
+        </div>
       </form>
     )
   }

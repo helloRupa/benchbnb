@@ -530,7 +530,7 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "background-modal"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        className: "new-bench"
+        className: "new-bench clear-fix"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/",
         className: "back-link"
@@ -778,7 +778,11 @@ function (_React$Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "benches"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sort-menu clear-fix"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "arrow-down"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         value: this.state.sort,
         onChange: this.handleChange
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
@@ -794,7 +798,7 @@ function (_React$Component) {
         value: "seating-desc"
       }, "Seating \u2193"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "no-order"
-      }, "Default")), this.state.benches.map(function (bench) {
+      }, "Default"))), this.state.benches.map(function (bench) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_bench_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: bench.id,
           bench: bench
@@ -839,7 +843,7 @@ var BenchIndexItem = function BenchIndexItem(_ref) {
     onClick: goToBench
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: bench.image
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Score: ", bench.rating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.seating, " seats"));
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, bench.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Score: ", bench.rating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.seating, " seats"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(BenchIndexItem));
@@ -1204,7 +1208,7 @@ function (_React$Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "seating"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "minSeating"
       }, "Min. Seats"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "number",
@@ -1214,7 +1218,7 @@ function (_React$Component) {
         max: "100",
         value: this.state.min_seating,
         onChange: this.handleChange
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "maxSeating"
       }, "Max. Seats"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "number",
@@ -1224,7 +1228,7 @@ function (_React$Component) {
         max: "100",
         value: this.state.max_seating,
         onChange: this.handleChange
-      }));
+      })));
     }
   }]);
 
@@ -1333,7 +1337,7 @@ var Loading = function Loading(_ref) {
   var loading = _ref.loading;
   var loadScreen = loading ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "loading"
-  }, "Content is loading") : '';
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Benches are loading")) : '';
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, loadScreen);
 };
 
@@ -1671,13 +1675,15 @@ var Search = function Search(_ref) {
     benches: benches,
     updateBounds: updateBounds,
     benchesObj: benchesObj
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_form__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "bench-results"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_form__WEBPACK_IMPORTED_MODULE_3__["default"], {
     updateSeating: updateSeating
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_bench_index__WEBPACK_IMPORTED_MODULE_1__["default"], {
     fetchBenches: fetchBenches,
     benches: benches,
     filters: filters
-  }));
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Search);
@@ -1816,7 +1822,7 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "background-modal"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        className: "login"
+        className: "login clear-fix"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, formTypeText), link, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_errors__WEBPACK_IMPORTED_MODULE_2__["default"], {
         errors: this.props.errors
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {

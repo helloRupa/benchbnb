@@ -1,0 +1,35 @@
+#map-container {
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  display: block;
+}
+
+@media all and (min-width: 500px) {
+  #map-container {
+    width: 440px;
+    height: 440px;
+  }
+}
+
+@media all and (min-width: 860px) {
+  #map-container {
+    width: 350px;
+    height: 350px;
+    float: left;
+  }
+}
+
+@media all and (min-width: 920px) {
+  #map-container {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media all and (min-width: 1000px) {
+  #map-container {
+    width: 500px;
+    height: 500px;
+  }
+}

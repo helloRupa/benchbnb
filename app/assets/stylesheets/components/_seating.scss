@@ -1,0 +1,22 @@
+.seating {
+  width: auto;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: flex-end;
+
+  div {
+    margin-left: 32px;
+  }
+
+  label {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  input[type="number"] {
+    display: inline-block;
+    width: 50px;
+    font-size: $base-font-size;
+  }
+}

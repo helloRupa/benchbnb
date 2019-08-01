@@ -64,6 +64,8 @@ export default class BenchIndex extends React.Component {
   render() {
     return (
       <section className="benches">
+        <div className="sort-menu clear-fix">
+          <span className="arrow-down"></span>
         <select value={this.state.sort} onChange={this.handleChange}>
           <option disabled value="none">Sort By:</option>
           <option value="rating-asc">Rating &uarr;</option>
@@ -72,6 +74,7 @@ export default class BenchIndex extends React.Component {
           <option value="seating-desc">Seating &darr;</option>
           <option value="no-order">Default</option>
         </select>
+        </div>
 
         { this.state.benches.map((bench) => <BenchIndexItem key={bench.id} bench={bench} />) }
       </section>

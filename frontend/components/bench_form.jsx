@@ -64,7 +64,7 @@ class BenchForm extends React.Component {
       <div>
         <div className="background-modal"></div>
       
-      <form className="new-bench">
+      <form className="new-bench clear-fix">
         <Link to="/" className="back-link">{"<<"} Back to benches</Link>
         <DisplayErrors errors={this.props.errors} />
         <label htmlFor="lat">Latitude:</label>

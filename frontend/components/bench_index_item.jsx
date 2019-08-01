@@ -9,7 +9,7 @@ const BenchIndexItem = ({ bench, history }) => {
   return (
     <ul className="bench-index-item" key={bench.id} onClick={goToBench} >
       <li><img src={ bench.image } /></li>
-      <li>{bench.description}</li>
+      <li><h2>{bench.description}</h2></li>
       <li>Score: {bench.rating}</li>
       <li>{bench.seating} seats</li>
     </ul>

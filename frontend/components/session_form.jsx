@@ -36,7 +36,7 @@ export default class SessionForm extends React.Component {
     return (
       <div>
         <div className="background-modal"></div>
-      <form className="login">
+      <form className="login clear-fix">
         <h1>{formTypeText}</h1>
         { link }
         <DisplayErrors errors={this.props.errors} />
