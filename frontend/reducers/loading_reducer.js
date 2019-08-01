@@ -1,6 +1,6 @@
 import { LOADING, DONE_LOADING } from '../actions/loading_actions';
 
-const loadingReducer = (state = false, action) => {
+const loadingReducer = (state = true, action) => {
   switch(action.type) {
     case LOADING:
       return true;

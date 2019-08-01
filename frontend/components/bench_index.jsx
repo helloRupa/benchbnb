@@ -9,8 +9,8 @@ export default class BenchIndex extends React.Component {
     window.scrollTo(0, 0);
   }
 
-  fetchBenches() {
-    this.props.fetchBenches(this.props.filters)
+  fetchBenches(shouldLoad = true) {
+    this.props.fetchBenches(this.props.filters, shouldLoad)
       .then(() => this.setState({ benches: [...this.props.benches] }));
   }
 
@@ -22,7 +22,7 @@ export default class BenchIndex extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (JSON.stringify(prevProps.filters) !== JSON.stringify(this.props.filters)) {
-      this.fetchBenches();
+      this.fetchBenches(false);
     }
   }
 

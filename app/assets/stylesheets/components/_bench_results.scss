@@ -1,9 +1,8 @@
 .bench-results {
-  vertical-align: top;
-  height: calc(100vh - 150px);
-  overflow-y: scroll;
-  padding: 0 30px;
-  float: right;
+  overflow-y: visible;
+  display: block;
+  margin: 30px auto;
+  padding: 0 10px;
 
   .sort-menu {
     position: relative;
@@ -43,5 +42,16 @@
     li {
       width: calc(100% - 100px);
     }
+  }
+}
+
+@media all and (min-width: 860px) {
+  .bench-results {
+    vertical-align: top;
+    height: calc(100vh - 150px);
+    overflow-y: scroll;
+    padding: 0 30px;
+    float: right;
+    margin: 0;
   }
 }

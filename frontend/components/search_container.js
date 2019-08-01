@@ -11,7 +11,7 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = (dispatch) => ({
-  fetchBenches: (filters) => dispatch(fetchBenches(filters)),
+  fetchBenches: (filters, shouldLoad) => dispatch(fetchBenches(filters, shouldLoad)),
   updateBounds: (bounds) => dispatch(updateBounds(bounds)),
   updateSeating: (seating) => dispatch(updateSeating(seating)),
 });

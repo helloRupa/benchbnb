@@ -26,8 +26,10 @@ export const receiveSingleBench = (bench) => ({
   bench
 });
 
-export const fetchBenches = (filters) => (dispatch) => {
-  dispatch(loading);
+export const fetchBenches = (filters, shouldLoad = true) => (dispatch) => {
+  if (shouldLoad) {
+    dispatch(loading);
+  }
 
   return APIUtil.fetchBenches(filters)
     .then(

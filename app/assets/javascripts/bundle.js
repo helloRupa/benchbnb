@@ -204,8 +204,12 @@ var receiveSingleBench = function receiveSingleBench(bench) {
   };
 };
 var fetchBenches = function fetchBenches(filters) {
+  var shouldLoad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
   return function (dispatch) {
-    dispatch(_loading_actions__WEBPACK_IMPORTED_MODULE_1__["loading"]);
+    if (shouldLoad) {
+      dispatch(_loading_actions__WEBPACK_IMPORTED_MODULE_1__["loading"]);
+    }
+
     return _util_bench_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchBenches"](filters).then(function (benches) {
       return dispatch(receiveBenches(benches.benches));
     }, function (errors) {
@@ -697,7 +701,8 @@ function (_React$Component) {
     value: function fetchBenches() {
       var _this2 = this;
 
-      this.props.fetchBenches(this.props.filters).then(function () {
+      var shouldLoad = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+      this.props.fetchBenches(this.props.filters, shouldLoad).then(function () {
         return _this2.setState({
           benches: _toConsumableArray(_this2.props.benches)
         });
@@ -714,7 +719,7 @@ function (_React$Component) {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       if (JSON.stringify(prevProps.filters) !== JSON.stringify(this.props.filters)) {
-        this.fetchBenches();
+        this.fetchBenches(false);
       }
     }
   }, {
@@ -841,9 +846,9 @@ var BenchIndexItem = function BenchIndexItem(_ref) {
     className: "bench-index-item",
     key: bench.id,
     onClick: goToBench
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: bench.image
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, bench.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Score: ", bench.rating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.seating, " seats"));
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, bench.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Score: ", bench.rating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.seating, " seats"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(BenchIndexItem));
@@ -1720,8 +1725,8 @@ var mapState = function mapState(state) {
 
 var mapDispatch = function mapDispatch(dispatch) {
   return {
-    fetchBenches: function fetchBenches(filters) {
-      return dispatch(Object(_actions_bench_actions__WEBPACK_IMPORTED_MODULE_1__["fetchBenches"])(filters));
+    fetchBenches: function fetchBenches(filters, shouldLoad) {
+      return dispatch(Object(_actions_bench_actions__WEBPACK_IMPORTED_MODULE_1__["fetchBenches"])(filters, shouldLoad));
     },
     updateBounds: function updateBounds(bounds) {
       return dispatch(Object(_actions_filter_actions__WEBPACK_IMPORTED_MODULE_3__["updateBounds"])(bounds));
@@ -2206,7 +2211,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var loadingReducer = function loadingReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
