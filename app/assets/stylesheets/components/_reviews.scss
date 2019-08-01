@@ -1,0 +1,31 @@
+.reviews {
+  padding: 30px 10px;
+  max-width: 500px;
+  margin: auto;
+
+  .user-review {
+    border: $main-border;
+    padding: 20px;
+    border-radius: 4px;
+    margin-bottom: 30px;
+  }
+
+  .date {
+    font-size: 14px;
+    display: inline-block;
+    margin-left: 10px;
+  }
+
+  .rating {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+  }
+}
+
+@media all and (min-width: 860px) {
+  .reviews {
+    margin: 0;
+    padding: 30px 0;
+  }
+}

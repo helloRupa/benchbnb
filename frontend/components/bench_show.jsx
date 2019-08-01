@@ -35,16 +35,19 @@ export default class BenchShow extends React.Component {
     return (
       <section className="bench-details">
         <Link to="/" className="back-link">{"<<"} Back to benches</Link>
+
+        <div className="clear-fix">
         <SingleBenchMap lat={bench.lat} lng={bench.lng} />
 
-        <ul>
+        <ul className="details">
           <img src={bench.image} />
-          <li>{bench.description}</li>
+          <li><h2>{bench.description}</h2></li>
           <li>Score: {bench.rating} ({bench.num_reviews} {review_text})</li>
           <li>{bench.seating} seats</li>
           <li>Latitude: {bench.lat}</li>
           <li>Longitude: {bench.lng}</li>
         </ul>
+        </div>
 
         <ReviewFormContainer />
 

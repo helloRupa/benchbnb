@@ -3,8 +3,8 @@ import React from 'react';
 const Reviews = ({ reviews }) => {
 
   const showReview = (review) => (
-    <div>
-      <h3>{review.username}</h3>
+    <div className="user-review">
+      <h4>{review.username}</h4>
       <span className="date">{review.date}</span>
       <span className="rating">{review.rating}</span>
       <p>{review.comment}</p>
@@ -15,7 +15,7 @@ const Reviews = ({ reviews }) => {
 
   return (
     <div className="reviews">
-      {sortedReviews().map((review) => <div key={review.id}>{showReview(review)}</div>)}
+      { sortedReviews().map((review) => <div key={review.id}>{showReview(review)}</div>) }
     </div>
   );
 };

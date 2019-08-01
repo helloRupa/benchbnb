@@ -34,8 +34,8 @@ class ReviewForm extends React.Component {
     const msg = this.props.loggedIn ? '' : 'Please log in to submit a review.';
 
     return (
-      <form className="review">
-        <h2>Review Bench</h2>
+      <form className="review clear-fix">
+        <h3>Review Bench</h3>
         <DisplayErrors errors={this.props.errors} />
         { msg }
 

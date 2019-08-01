@@ -1059,12 +1059,16 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/",
         className: "back-link"
-      }, "<<", " Back to benches"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_single_bench_map__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }, "<<", " Back to benches"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "clear-fix"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_single_bench_map__WEBPACK_IMPORTED_MODULE_1__["default"], {
         lat: bench.lat,
         lng: bench.lng
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "details"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: bench.image
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Score: ", bench.rating, " (", bench.num_reviews, " ", review_text, ")"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.seating, " seats"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Latitude: ", bench.lat), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Longitude: ", bench.lng)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, bench.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Score: ", bench.rating, " (", bench.num_reviews, " ", review_text, ")"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.seating, " seats"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Latitude: ", bench.lat), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Longitude: ", bench.lng))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews__WEBPACK_IMPORTED_MODULE_4__["default"], {
         reviews: this.props.reviews
       }));
     }
@@ -1530,8 +1534,8 @@ function (_React$Component) {
       var disabled = this.props.loggedIn ? '' : 'disabled';
       var msg = this.props.loggedIn ? '' : 'Please log in to submit a review.';
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        className: "review"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Review Bench"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_errors__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        className: "review clear-fix"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Review Bench"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_errors__WEBPACK_IMPORTED_MODULE_1__["default"], {
         errors: this.props.errors
       }), msg, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "rating"
@@ -1622,7 +1626,9 @@ var Reviews = function Reviews(_ref) {
   var reviews = _ref.reviews;
 
   var showReview = function showReview(review) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, review.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "user-review"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, review.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "date"
     }, review.date), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "rating"

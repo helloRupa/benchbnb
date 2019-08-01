@@ -1,0 +1,57 @@
+.bench-details {
+  margin: 30px auto;
+  padding: 0 10px;
+
+  .details {
+    border: none;
+    display: block;
+    margin: auto;
+    padding: 30px;
+    width: auto;
+    text-align: center;
+    border-bottom: $main-border;
+
+    img {
+      max-height: 150px;
+      margin: 20px auto;
+    }
+  }
+
+  form {
+    background-color: transparent;
+    max-width: 400px;
+    padding: 0;
+    margin: 30px auto;
+
+    input[type="number"] {
+      width: 100px;
+    }
+  }
+}
+
+@media all and (min-width: 860px) {
+  .bench-details {
+    padding: 0 30px;
+
+    .details {
+      border: $main-border;
+      border-radius: 4px;
+      float: right;
+      width: 400px;
+    }
+
+    form {
+      margin: 30px 0;
+    }
+  }
+}
+
+@media all and (min-width: 910px) {
+  .bench-details {
+    .details {
+      img {
+        max-height: 240px;
+      }
+    }
+  }
+}
