@@ -1942,16 +1942,20 @@ var SingleBenchMap =
 function (_React$Component) {
   _inherits(SingleBenchMap, _React$Component);
 
-  function SingleBenchMap() {
+  function SingleBenchMap(props) {
+    var _this;
+
     _classCallCheck(this, SingleBenchMap);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(SingleBenchMap).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SingleBenchMap).call(this, props));
+    _this.mapOptions = {};
+    return _this;
   }
 
   _createClass(SingleBenchMap, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      var mapOptions = {
+    key: "setMapOptions",
+    value: function setMapOptions() {
+      this.mapOptions = {
         center: {
           lat: this.props.lat,
           lng: this.props.lng
@@ -1959,25 +1963,42 @@ function (_React$Component) {
         zoom: 13,
         draggable: false
       };
-
+    }
+  }, {
+    key: "makeMap",
+    value: function makeMap() {
+      this.map = new google.maps.Map(this.mapNode, this.mapOptions);
+      var pos = new google.maps.LatLng(this.props.lat, this.props.lng);
+      new google.maps.Marker({
+        position: pos,
+        map: this.map
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
       if (this.props.lat != undefined) {
-        this.map = new google.maps.Map(this.mapNode, mapOptions);
-        var pos = new google.maps.LatLng(this.props.lat, this.props.lng);
-        new google.maps.Marker({
-          position: pos,
-          map: this.map
-        });
+        this.setMapOptions();
+        this.makeMap();
+      }
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (this.props.lat != undefined && prevProps.lat !== this.props.lat) {
+        this.setMapOptions();
+        this.makeMap();
       }
     }
   }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this2 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "map-container",
         ref: function ref(map) {
-          return _this.mapNode = map;
+          return _this2.mapNode = map;
         }
       });
     }
