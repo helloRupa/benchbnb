@@ -682,6 +682,7 @@ function (_React$Component) {
       benches: _toConsumableArray(_this.props.benches)
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    window.scrollTo(0, 0);
     return _this;
   }
 
@@ -1000,19 +1001,23 @@ var BenchShow =
 function (_React$Component) {
   _inherits(BenchShow, _React$Component);
 
-  function BenchShow() {
+  function BenchShow(props) {
+    var _this;
+
     _classCallCheck(this, BenchShow);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(BenchShow).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(BenchShow).call(this, props));
+    window.scrollTo(0, 0);
+    return _this;
   }
 
   _createClass(BenchShow, [{
     key: "fetchBench",
     value: function fetchBench() {
-      var _this = this;
+      var _this2 = this;
 
       this.props.showBench(this.props.match.params.id).fail(function (err) {
-        _this.props.history.push('/404');
+        _this2.props.history.push('/404');
 
         console.log('Bench does not exist');
       });
@@ -1033,6 +1038,7 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var bench = this.props.bench;
+      var review_text = bench.num_reviews === 1 ? 'review' : 'reviews';
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "bench-details"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
@@ -1042,7 +1048,7 @@ function (_React$Component) {
         lng: bench.lng
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: bench.image
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Score: ", bench.rating, " (", bench.num_reviews, " reviews)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.seating, " seats"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Latitude: ", bench.lat), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Longitude: ", bench.lng)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Score: ", bench.rating, " (", bench.num_reviews, " ", review_text, ")"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.seating, " seats"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Latitude: ", bench.lat), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Longitude: ", bench.lng)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews__WEBPACK_IMPORTED_MODULE_4__["default"], {
         reviews: this.props.reviews
       }));
     }
@@ -1597,9 +1603,15 @@ var Reviews = function Reviews(_ref) {
     }, review.rating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, review.comment));
   };
 
+  var sortedReviews = function sortedReviews() {
+    return reviews.sort(function (a, b) {
+      return new Date(b.date) - new Date(a.date);
+    });
+  };
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "reviews"
-  }, reviews.map(function (review) {
+  }, sortedReviews().map(function (review) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: review.id
     }, showReview(review));

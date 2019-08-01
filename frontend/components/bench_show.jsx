@@ -5,6 +5,10 @@ import ReviewFormContainer from './review_form_container';
 import Reviews from './reviews';
 
 export default class BenchShow extends React.Component {
+  constructor(props) {
+    super(props);
+    window.scrollTo(0, 0);
+  }
 
   fetchBench() {
     this.props.showBench(this.props.match.params.id)
@@ -26,6 +30,7 @@ export default class BenchShow extends React.Component {
 
   render() {
     const bench = this.props.bench;
+    const review_text = bench.num_reviews === 1 ? 'review' : 'reviews';
 
     return (
       <section className="bench-details">
@@ -35,7 +40,7 @@ export default class BenchShow extends React.Component {
         <ul>
           <img src={bench.image} />
           <li>{bench.description}</li>
-          <li>Score: {bench.rating} ({bench.num_reviews} reviews)</li>
+          <li>Score: {bench.rating} ({bench.num_reviews} {review_text})</li>
           <li>{bench.seating} seats</li>
           <li>Latitude: {bench.lat}</li>
           <li>Longitude: {bench.lng}</li>

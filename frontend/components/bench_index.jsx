@@ -6,6 +6,7 @@ export default class BenchIndex extends React.Component {
     super(props);
     this.state = { sort: 'none', benches: [...this.props.benches] };
     this.handleChange = this.handleChange.bind(this);
+    window.scrollTo(0, 0);
   }
 
   fetchBenches() {

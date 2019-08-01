@@ -11,9 +11,11 @@ const Reviews = ({ reviews }) => {
     </div>
   );
 
+  const sortedReviews = () => (reviews.sort((a, b) => new Date(b.date) - new Date(a.date)));
+
   return (
     <div className="reviews">
-      {reviews.map((review) => <div key={review.id}>{showReview(review)}</div>)}
+      {sortedReviews().map((review) => <div key={review.id}>{showReview(review)}</div>)}
     </div>
   );
 };
