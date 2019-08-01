@@ -1950,7 +1950,7 @@ function (_React$Component) {
 
   _createClass(SingleBenchMap, [{
     key: "componentDidUpdate",
-    value: function componentDidUpdate() {
+    value: function componentDidUpdate(prevProps) {
       var mapOptions = {
         center: {
           lat: this.props.lat,
@@ -1960,7 +1960,7 @@ function (_React$Component) {
         draggable: false
       };
 
-      if (this.props.lat != undefined) {
+      if (this.props.lat != undefined && prevProps.lat !== this.props.lat) {
         this.map = new google.maps.Map(this.mapNode, mapOptions);
         var pos = new google.maps.LatLng(this.props.lat, this.props.lng);
         new google.maps.Marker({
