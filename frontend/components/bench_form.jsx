@@ -37,7 +37,7 @@ class BenchForm extends React.Component {
 
   preview() {
     if (this.state.photoUrl != '') {
-      return <img src={this.state.photoUrl} />;
+      return <img src={this.state.photoUrl} className="preview" />;
     }
   }
 
@@ -61,8 +61,11 @@ class BenchForm extends React.Component {
 
   render() {
     return (
+      <div>
+        <div className="background-modal"></div>
+      
       <form className="new-bench">
-        <Link to="/">{"<<"} Back to benches</Link>
+        <Link to="/" className="back-link">{"<<"} Back to benches</Link>
         <DisplayErrors errors={this.props.errors} />
         <label htmlFor="lat">Latitude:</label>
         <input type="text" name="lat" id="lat" value={this.state.lat} disabled />
@@ -94,6 +97,7 @@ class BenchForm extends React.Component {
 
         <input type="submit" onClick={this.handleSubmit} />
       </form>
+      </div>
     );
   }
 }

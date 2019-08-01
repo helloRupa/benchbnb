@@ -1,0 +1,17 @@
+.new-bench {
+  .preview {
+    width: 65px;
+    height: 65px;
+    float: right;
+    margin-top: -120px;
+  }
+}
+
+@media all and (min-width: 450px) {
+  .new-bench {
+    .preview {
+      width: 100px;
+      height: 100px;
+    }
+  }
+}

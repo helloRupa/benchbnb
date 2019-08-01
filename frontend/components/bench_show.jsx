@@ -34,7 +34,7 @@ export default class BenchShow extends React.Component {
 
     return (
       <section className="bench-details">
-        <Link to="/">{"<<"} Back to benches</Link>
+        <Link to="/" className="back-link">{"<<"} Back to benches</Link>
         <SingleBenchMap lat={bench.lat} lng={bench.lng} />
 
         <ul>

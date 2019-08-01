@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Greeting = ({ currentUser, logout }) => {
   const greeting = (currentUser) ? (
     <div className="nav">
-      <span>Hi {currentUser.username}!</span> / <a href="#" onClick={logout}>Logout</a>
+      <span className="username">Hi {currentUser.username} / </span><a href="#" onClick={logout}>Logout</a>
     </div>
   ) : (
     <div className="nav">

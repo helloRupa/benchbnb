@@ -499,7 +499,8 @@ function (_React$Component) {
     value: function preview() {
       if (this.state.photoUrl != '') {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: this.state.photoUrl
+          src: this.state.photoUrl,
+          className: "preview"
         });
       }
     }
@@ -526,10 +527,13 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "background-modal"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "new-bench"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/"
+        to: "/",
+        className: "back-link"
       }, "<<", " Back to benches"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_errors__WEBPACK_IMPORTED_MODULE_2__["default"], {
         errors: this.props.errors
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -576,7 +580,7 @@ function (_React$Component) {
       }), this.preview(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         onClick: this.handleSubmit
-      }));
+      })));
     }
   }]);
 
@@ -1044,7 +1048,8 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "bench-details"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        to: "/"
+        to: "/",
+        className: "back-link"
       }, "<<", " Back to benches"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_single_bench_map__WEBPACK_IMPORTED_MODULE_1__["default"], {
         lat: bench.lat,
         lng: bench.lng
@@ -1251,7 +1256,9 @@ var Greeting = function Greeting(_ref) {
       logout = _ref.logout;
   var greeting = currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "nav"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Hi ", currentUser.username, "!"), " / ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "username"
+  }, "Hi ", currentUser.username, " / "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "#",
     onClick: logout
   }, "Logout")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

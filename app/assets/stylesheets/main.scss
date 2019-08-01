@@ -51,12 +51,26 @@ form {
     border-radius: 4px;
   }
 
-  input[type="text"], input[type="password"] {
+  input[type="text"], input[type="password"], input[type="number"] {
     margin: 5px 0 20px 0;
     padding: 5px;
-    width: 100%;
     border: $main-border;
     font-size: $large-font-size;
+  }
+
+  input[type="text"], input[type="password"] {
+    width: 100%;
+  }
+
+  input[type="number"] {
+    width: 150px;
+    -moz-appearance: textfield;
+  }
+
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
   }
 
   input[type="submit"] {
@@ -66,6 +80,24 @@ form {
     font-weight: 700;
     float: right;
     cursor: pointer;
+  }
+
+  input[type="file"] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+
+  label[for="file"] {
+    cursor: pointer;
+    border: $main-border;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin: 5px 0 20px 0;
+    width: 150px;
   }
 }
 
@@ -93,6 +125,14 @@ form:after {
   height: 100%;
   width: 100%;
   z-index: -1;
+}
+
+.back-link {
+  color: $logo-color;
+  font-size: 14px;
+  display: block;
+  position: relative;
+  top: -10px;
 }
 
 @media all and (min-width: 450px) {

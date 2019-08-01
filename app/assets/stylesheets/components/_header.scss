@@ -16,19 +16,37 @@ header {
     font-family: $logo-font;
     font-weight: bold;
     color: $logo-color;
+
+    h1 {
+      margin: 0;
+    }
   }
 
   .nav {
-    a, button {
-      padding: 20px 5px;
+    a {
+      padding: 13px 5px;
     }
 
-    a:hover, button:hover {
+    a:hover {
       border-bottom: 2px solid $black;
     }
 
-    button, a {
+    a {
       border-bottom: 2px solid transparent;
+    }
+
+    .username {
+      display: none;
+    }
+  }
+}
+
+@media all and (min-width: 450px) {
+  header {
+    .nav {
+      .username {
+        display: inline;
+      }
     }
   }
 }
