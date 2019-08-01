@@ -120,9 +120,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-    to: "/"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Bench BnB")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_greeting_container__WEBPACK_IMPORTED_MODULE_1__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_loading_container__WEBPACK_IMPORTED_MODULE_10__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "whole-app"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_greeting_container__WEBPACK_IMPORTED_MODULE_1__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_loading_container__WEBPACK_IMPORTED_MODULE_10__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
     path: "/login",
     component: _components_login_form_container__WEBPACK_IMPORTED_MODULE_3__["default"],
     exact: true
@@ -144,7 +144,7 @@ var App = function App() {
     component: _components_search_container__WEBPACK_IMPORTED_MODULE_6__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     component: _components_not_found_jsx__WEBPACK_IMPORTED_MODULE_9__["default"]
-  })));
+  }))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -1249,16 +1249,24 @@ __webpack_require__.r(__webpack_exports__);
 var Greeting = function Greeting(_ref) {
   var currentUser = _ref.currentUser,
       logout = _ref.logout;
-  var greeting = currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Hi ", currentUser.username, "!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  var greeting = currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "nav"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Hi ", currentUser.username, "!"), " / ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "#",
     onClick: logout
-  }, "Logout")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, "Logout")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "nav"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/signup"
-  }, "Sign Up"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, "Sign Up"), " / ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/login"
   }, "Log In"));
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "greeting"
-  }, greeting);
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/",
+    className: "logo"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Bench BnB")), greeting);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Greeting);
@@ -1798,7 +1806,9 @@ function (_React$Component) {
       }, "Need an account? ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/signup"
       }, "Sign Up!"));
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "background-modal"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "login"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, formTypeText), link, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_display_errors__WEBPACK_IMPORTED_MODULE_2__["default"], {
         errors: this.props.errors
@@ -1824,7 +1834,7 @@ function (_React$Component) {
         type: "submit",
         onClick: this.handleSubmit,
         value: formTypeText
-      }));
+      })));
     }
   }]);
 

@@ -1,0 +1,16 @@
+html, header, body, div, main, section, ul, li, p, a, h1, h2, h3, h4, h5, h6, form, input, button, select, label, img {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: inherit;
+  font: inherit;
+  box-sizing: inherit;
+  text-decoration: inherit;
+  text-align: inherit;
+}
+
+li {
+  list-style: none;
+}

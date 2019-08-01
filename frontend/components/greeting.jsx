@@ -3,20 +3,19 @@ import { Link } from 'react-router-dom';
 
 const Greeting = ({ currentUser, logout }) => {
   const greeting = (currentUser) ? (
-    <div>
-      <p>Hi {currentUser.username}!</p>
-      <button onClick={logout}>Logout</button>
+    <div className="nav">
+      <span>Hi {currentUser.username}!</span> / <a href="#" onClick={logout}>Logout</a>
     </div>
   ) : (
-    <div>
-      <Link to="/signup">Sign Up</Link>
-      <Link to="/login">Log In</Link>
+    <div className="nav">
+      <Link to="/signup">Sign Up</Link> / <Link to="/login">Log In</Link>
     </div>
   );
 
   return (
     <div className="greeting">
-      {greeting}
+      <Link to="/" className="logo"><h1>Bench BnB</h1></Link>
+      { greeting }
     </div>
   );
 };

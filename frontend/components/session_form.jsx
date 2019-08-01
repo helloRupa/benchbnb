@@ -34,6 +34,8 @@ export default class SessionForm extends React.Component {
     );
 
     return (
+      <div>
+        <div className="background-modal"></div>
       <form className="login">
         <h1>{formTypeText}</h1>
         { link }
@@ -59,6 +61,7 @@ export default class SessionForm extends React.Component {
 
         <input type="submit" onClick={this.handleSubmit} value={formTypeText} />
       </form>
+      </div>
     );
   }
 }
