@@ -1344,10 +1344,10 @@ __webpack_require__.r(__webpack_exports__);
 
 var Loading = function Loading(_ref) {
   var loading = _ref.loading;
-  var loadScreen = loading ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "loading"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Benches are loading")) : '';
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, loadScreen);
+  var transition = loading ? '' : 'fade-out';
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "loading ".concat(transition)
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Benches are loading"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Loading);
@@ -1960,7 +1960,7 @@ function (_React$Component) {
         draggable: false
       };
 
-      if (this.props.lat != undefined && prevProps.lat !== this.props.lat) {
+      if (this.props.lat != undefined) {
         this.map = new google.maps.Map(this.mapNode, mapOptions);
         var pos = new google.maps.LatLng(this.props.lat, this.props.lng);
         new google.maps.Marker({

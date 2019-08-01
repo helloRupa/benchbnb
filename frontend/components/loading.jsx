@@ -1,12 +1,10 @@
 import React from 'react';
 
 const Loading = ({ loading }) => {
-  const loadScreen = (loading) ? <div className="loading"><span>Benches are loading</span></div> : '';
+  const transition = (loading) ? '' : 'fade-out';
 
   return (
-    <div>
-      { loadScreen }
-    </div>
+    <div className={`loading ${transition}`}><span>Benches are loading</span></div>
   );
 };
 
