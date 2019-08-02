@@ -1,0 +1,17 @@
+.stars {
+  margin: 5px 0 24px 0;
+  
+  .selected-star {
+    color: $yellow;
+  }
+
+  span {
+    display: inline-block;
+    padding-right: 3px;
+    cursor: pointer;
+  }
+
+  span:hover {
+    color: $light-yellow;
+  }
+}

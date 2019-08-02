@@ -29,6 +29,28 @@ class ReviewForm extends React.Component {
     }
   }
 
+  handleStarClick(val) {
+    this.setState({ rating: val });
+  }
+
+  starClass(val) {
+    return (this.state.rating >= val) ? 'selected-star' : '';
+  }
+
+  makeStars() {
+    return (
+      <div className="stars" ref={ stars => this.stars = stars }>
+        { [1, 2, 3, 4, 5].map((val) => (
+        <span 
+          key={val} 
+          onClick={() => this.handleStarClick(val)} 
+          className={this.starClass(val)}>
+          &#9733; 
+        </span>)) }
+      </div>
+    );
+  }
+
   render() {
     const disabled = this.props.loggedIn ? '' : 'disabled';
     const msg = this.props.loggedIn ? '' : 'Please log in to submit a review.';
@@ -37,18 +59,10 @@ class ReviewForm extends React.Component {
       <form className="review clear-fix">
         <h3>Review Bench</h3>
         <DisplayErrors errors={this.props.errors} />
-        { msg }
+        { msg }       
 
-        <label htmlFor="rating">Rating (1 - 5)</label>
-        <input 
-          type="number" 
-          id="rating" 
-          name="rating" 
-          min="1" 
-          max="5" 
-          value={this.state.rating}
-          onChange={this.handleChange}
-          disabled={disabled} />
+        <label htmlFor="rating">Rating</label>
+        {this.makeStars()}
 
         <label htmlFor="comment">Comment</label>
         <textarea 

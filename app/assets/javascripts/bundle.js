@@ -1529,6 +1529,38 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "handleStarClick",
+    value: function handleStarClick(val) {
+      this.setState({
+        rating: val
+      });
+    }
+  }, {
+    key: "starClass",
+    value: function starClass(val) {
+      return this.state.rating >= val ? 'selected-star' : '';
+    }
+  }, {
+    key: "makeStars",
+    value: function makeStars() {
+      var _this2 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "stars",
+        ref: function ref(stars) {
+          return _this2.stars = stars;
+        }
+      }, [1, 2, 3, 4, 5].map(function (val) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          key: val,
+          onClick: function onClick() {
+            return _this2.handleStarClick(val);
+          },
+          className: _this2.starClass(val)
+        }, "\u2605");
+      }));
+    }
+  }, {
     key: "render",
     value: function render() {
       var disabled = this.props.loggedIn ? '' : 'disabled';
@@ -1539,16 +1571,7 @@ function (_React$Component) {
         errors: this.props.errors
       }), msg, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "rating"
-      }, "Rating (1 - 5)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "number",
-        id: "rating",
-        name: "rating",
-        min: "1",
-        max: "5",
-        value: this.state.rating,
-        onChange: this.handleChange,
-        disabled: disabled
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      }, "Rating"), this.makeStars(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "comment"
       }, "Comment"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         id: "comment",
