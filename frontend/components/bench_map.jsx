@@ -42,7 +42,10 @@ class BenchMap extends React.Component {
 
   render() {
     return (
-      <div id="map-container" ref={ map => this.mapNode = map } />
+      <div>
+        <div className="instruction">Click an empty area to create a new bench or a marker to view an existing one:</div>
+        <div id="map-container" ref={ map => this.mapNode = map } />
+      </div>
     );
   }
 }
