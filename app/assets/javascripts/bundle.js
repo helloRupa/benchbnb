@@ -106,8 +106,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_bench_form_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/bench_form_container */ "./frontend/components/bench_form_container.js");
 /* harmony import */ var _components_bench_show_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/bench_show_container */ "./frontend/components/bench_show_container.js");
 /* harmony import */ var _components_not_found_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/not_found.jsx */ "./frontend/components/not_found.jsx");
-/* harmony import */ var _components_loading_container__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/loading_container */ "./frontend/components/loading_container.js");
-
 
 
 
@@ -122,7 +120,7 @@ __webpack_require__.r(__webpack_exports__);
 var App = function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "whole-app"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_greeting_container__WEBPACK_IMPORTED_MODULE_1__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_loading_container__WEBPACK_IMPORTED_MODULE_10__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_greeting_container__WEBPACK_IMPORTED_MODULE_1__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
     path: "/login",
     component: _components_login_form_container__WEBPACK_IMPORTED_MODULE_3__["default"],
     exact: true
@@ -993,6 +991,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _review_form_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./review_form_container */ "./frontend/components/review_form_container.js");
 /* harmony import */ var _reviews__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./reviews */ "./frontend/components/reviews.jsx");
 /* harmony import */ var _static_stars__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./static_stars */ "./frontend/components/static_stars.jsx");
+/* harmony import */ var _loading_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./loading_container */ "./frontend/components/loading_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1010,6 +1009,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1063,7 +1063,7 @@ function (_React$Component) {
       var review_text = bench.num_reviews === 1 ? 'review' : 'reviews';
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "bench-details"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_loading_container__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/",
         className: "back-link"
       }, "<<", " Back to benches"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1711,6 +1711,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bench_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bench_index */ "./frontend/components/bench_index.jsx");
 /* harmony import */ var _bench_map__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./bench_map */ "./frontend/components/bench_map.jsx");
 /* harmony import */ var _filter_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./filter_form */ "./frontend/components/filter_form.jsx");
+/* harmony import */ var _loading_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./loading_container */ "./frontend/components/loading_container.js");
+
 
 
 
@@ -1725,7 +1727,7 @@ var Search = function Search(_ref) {
       filters = _ref.filters;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "search"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_bench_map__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_loading_container__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_bench_map__WEBPACK_IMPORTED_MODULE_2__["default"], {
     benches: benches,
     updateBounds: updateBounds,
     benchesObj: benchesObj

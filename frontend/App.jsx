@@ -8,7 +8,6 @@ import SearchContainer from './components/search_container';
 import BenchFormContainer from './components/bench_form_container';
 import BenchShowContainer from './components/bench_show_container';
 import NotFound from './components/not_found.jsx';
-import LoadingContainer from './components/loading_container';
 
 const App = () => {
   return (
@@ -18,8 +17,6 @@ const App = () => {
       </header>
 
       <main>
-        <LoadingContainer />
-
         <Switch>
           <AuthRoute path="/login" component={LoginFormContainer} exact={true} />
           <AuthRoute path="/signup" component={SignupFormContainer} exact={true} />
