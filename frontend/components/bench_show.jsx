@@ -33,6 +33,7 @@ export default class BenchShow extends React.Component {
   render() {
     const bench = this.props.bench;
     const review_text = bench.num_reviews === 1 ? 'review' : 'reviews';
+    const benchRating = bench.rating ? bench.rating.toFixed(1) : 0;
 
     return (
       <section className="bench-details">
@@ -46,7 +47,7 @@ export default class BenchShow extends React.Component {
           <img src={bench.image} />
           <li><h2>{bench.description}</h2></li>
           <li><StaticStars rating={bench.rating} /></li>
-          <li>{bench.rating} ({bench.num_reviews} {review_text})</li>
+          <li>{benchRating} ({bench.num_reviews} {review_text})</li>
           <li>{bench.seating} seats</li>
           <li>Latitude: {bench.lat}</li>
           <li>Longitude: {bench.lng}</li>

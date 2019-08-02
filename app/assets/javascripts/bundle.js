@@ -843,6 +843,7 @@ var BenchIndexItem = function BenchIndexItem(_ref) {
     history.push("/benches/".concat(bench.id));
   };
 
+  var benchRating = bench.rating ? bench.rating.toFixed(1) : 0;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     className: "bench-index-item",
     key: bench.id,
@@ -851,7 +852,7 @@ var BenchIndexItem = function BenchIndexItem(_ref) {
     src: bench.image
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, bench.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_static_stars__WEBPACK_IMPORTED_MODULE_2__["default"], {
     rating: bench.rating
-  }), " ", bench.rating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.seating, " seats"));
+  }), " ", benchRating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.seating, " seats"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(BenchIndexItem));
@@ -1061,6 +1062,7 @@ function (_React$Component) {
     value: function render() {
       var bench = this.props.bench;
       var review_text = bench.num_reviews === 1 ? 'review' : 'reviews';
+      var benchRating = bench.rating ? bench.rating.toFixed(1) : 0;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "bench-details"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_loading_container__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
@@ -1077,7 +1079,7 @@ function (_React$Component) {
         src: bench.image
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, bench.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_static_stars__WEBPACK_IMPORTED_MODULE_5__["default"], {
         rating: bench.rating
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.rating, " (", bench.num_reviews, " ", review_text, ")"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.seating, " seats"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Latitude: ", bench.lat), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Longitude: ", bench.lng))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, benchRating, " (", bench.num_reviews, " ", review_text, ")"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.seating, " seats"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Latitude: ", bench.lat), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Longitude: ", bench.lng))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews__WEBPACK_IMPORTED_MODULE_4__["default"], {
         reviews: this.props.reviews
       }));
     }
