@@ -87,7 +87,6 @@ class BenchForm extends React.Component {
           name="seating"
           id="seating"
           min="1"
-          max="1000"
           value={this.state.seating}
           onChange={this.handleChange} />
 

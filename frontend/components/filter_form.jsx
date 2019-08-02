@@ -26,7 +26,6 @@ export default class FilterForm extends React.Component {
           id="minSeating"
           name="min_seating"
           min="1"
-          max="100"
           value={this.state.min_seating}
           onChange={this.handleChange} />
         </div>
@@ -38,7 +37,6 @@ export default class FilterForm extends React.Component {
           id="maxSeating"
           name="max_seating"
           min="1"
-          max="100"
           value={this.state.max_seating}
           onChange={this.handleChange} />
         </div>
