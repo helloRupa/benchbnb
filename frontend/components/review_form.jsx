@@ -61,10 +61,10 @@ class ReviewForm extends React.Component {
         <DisplayErrors errors={this.props.errors} />
         { msg }       
 
-        <label htmlFor="rating">Rating</label>
+        <label htmlFor="rating">Rating<span className="required">*</span></label>
         {this.makeStars()}
 
-        <label htmlFor="comment">Comment</label>
+        <label htmlFor="comment">Comment<span className="required">*</span></label>
         <textarea 
           id="comment"
           name="comment"

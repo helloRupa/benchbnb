@@ -540,7 +540,7 @@ function (_React$Component) {
         errors: this.props.errors
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "lat"
-      }, "Latitude:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "Latitude"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         name: "lat",
         id: "lat",
@@ -548,7 +548,7 @@ function (_React$Component) {
         disabled: true
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "lng"
-      }, "Longitude:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "Longitude"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         name: "lng",
         id: "lng",
@@ -556,7 +556,9 @@ function (_React$Component) {
         disabled: true
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "description"
-      }, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "Description", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "required"
+      }, "*")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         name: "description",
         id: "description",
@@ -564,7 +566,9 @@ function (_React$Component) {
         onChange: this.handleChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "seating"
-      }, "Number of Seats"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "Number of Seats", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "required"
+      }, "*")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "number",
         name: "seating",
         id: "seating",
@@ -1584,9 +1588,13 @@ function (_React$Component) {
         errors: this.props.errors
       }), msg, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "rating"
-      }, "Rating"), this.makeStars(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      }, "Rating", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "required"
+      }, "*")), this.makeStars(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "comment"
-      }, "Comment"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+      }, "Comment", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "required"
+      }, "*")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         id: "comment",
         name: "comment",
         value: this.state.comment,
@@ -1887,7 +1895,9 @@ function (_React$Component) {
         errors: this.props.errors
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "username"
-      }, "Username:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "Username", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "required"
+      }, "*")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         onChange: this.handleChange,
         value: this.state.username,
@@ -1896,7 +1906,9 @@ function (_React$Component) {
         placeholder: "Username"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "password"
-      }, "Password:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "Password", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "required"
+      }, "*")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "password",
         onChange: this.handleChange,
         value: this.state.password,

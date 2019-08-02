@@ -41,7 +41,7 @@ export default class SessionForm extends React.Component {
         { link }
         <DisplayErrors errors={this.props.errors} />
 
-        <label htmlFor="username">Username:</label>
+        <label htmlFor="username">Username<span className="required">*</span></label>
         <input 
           type="text" 
           onChange={this.handleChange} 
@@ -50,7 +50,7 @@ export default class SessionForm extends React.Component {
           id="username"
           placeholder="Username" />
 
-        <label htmlFor="password">Password:</label>
+        <label htmlFor="password">Password<span className="required">*</span></label>
         <input 
           type="password" 
           onChange={this.handleChange} 

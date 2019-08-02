@@ -121,6 +121,7 @@ form {
     background-color: $white;
     margin-bottom: 20px;
     padding: 5px;
+    margin-top: 5px;
   }
 }
 
@@ -177,6 +178,12 @@ select {
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-top: 10px solid $black;
+}
+
+.required {
+  color: $logo-color;
+  vertical-align: super;
+  font-size: $small-font-size; 
 }
 
 @media all and (min-width: 450px) {

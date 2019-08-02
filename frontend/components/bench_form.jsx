@@ -67,13 +67,13 @@ class BenchForm extends React.Component {
       <form className="new-bench clear-fix">
         <Link to="/" className="back-link">{"<<"} Back to benches</Link>
         <DisplayErrors errors={this.props.errors} />
-        <label htmlFor="lat">Latitude:</label>
+        <label htmlFor="lat">Latitude</label>
         <input type="text" name="lat" id="lat" value={this.state.lat} disabled />
 
-        <label htmlFor="lng">Longitude:</label>
+        <label htmlFor="lng">Longitude</label>
         <input type="text" name="lng" id="lng" value={this.state.lng} disabled />
 
-        <label htmlFor="description">Description</label>
+        <label htmlFor="description">Description<span className="required">*</span></label>
         <input 
           type="text" 
           name="description" 
@@ -81,7 +81,7 @@ class BenchForm extends React.Component {
           value={this.state.description}
           onChange={this.handleChange} />
 
-        <label htmlFor="seating">Number of Seats</label>
+        <label htmlFor="seating">Number of Seats<span className="required">*</span></label>
         <input 
           type="number"
           name="seating"
