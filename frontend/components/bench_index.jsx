@@ -11,7 +11,9 @@ export default class BenchIndex extends React.Component {
 
   fetchBenches(shouldLoad = true) {
     this.props.fetchBenches(this.props.filters, shouldLoad)
-      .then(() => this.setState({ benches: [...this.props.benches] }));
+      .then(() => this.setState({ benches: [...this.props.benches] }, 
+        () => this.sortBenches(this.state.sort))
+      );
   }
 
   componentDidMount() {
