@@ -583,7 +583,8 @@ function (_React$Component) {
         onChange: this.handleFile
       }), this.preview(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
-        onClick: this.handleSubmit
+        onClick: this.handleSubmit,
+        value: "Submit"
       })));
     }
   }]);
@@ -831,6 +832,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _static_stars__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./static_stars */ "./frontend/components/static_stars.jsx");
+
 
 
 
@@ -848,7 +851,9 @@ var BenchIndexItem = function BenchIndexItem(_ref) {
     onClick: goToBench
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: bench.image
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, bench.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Score: ", bench.rating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.seating, " seats"));
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, bench.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_static_stars__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    rating: bench.rating
+  }), " ", bench.rating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.seating, " seats"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(BenchIndexItem));
@@ -987,6 +992,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _review_form_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./review_form_container */ "./frontend/components/review_form_container.js");
 /* harmony import */ var _reviews__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./reviews */ "./frontend/components/reviews.jsx");
+/* harmony import */ var _static_stars__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./static_stars */ "./frontend/components/static_stars.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1004,6 +1010,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1068,7 +1075,9 @@ function (_React$Component) {
         className: "details"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: bench.image
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, bench.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Score: ", bench.rating, " (", bench.num_reviews, " ", review_text, ")"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.seating, " seats"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Latitude: ", bench.lat), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Longitude: ", bench.lng))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, bench.description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_static_stars__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        rating: bench.rating
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.rating, " (", bench.num_reviews, " ", review_text, ")"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, bench.seating, " seats"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Latitude: ", bench.lat), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Longitude: ", bench.lng))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_review_form_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_reviews__WEBPACK_IMPORTED_MODULE_4__["default"], {
         reviews: this.props.reviews
       }));
     }
@@ -1648,6 +1657,17 @@ __webpack_require__.r(__webpack_exports__);
 var Reviews = function Reviews(_ref) {
   var reviews = _ref.reviews;
 
+  var makeStars = function makeStars(review) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "static-stars"
+    }, [1, 2, 3, 4, 5].map(function (val) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        key: val,
+        className: val <= review.rating ? 'selected-star' : ''
+      }, "\u2605");
+    }));
+  };
+
   var showReview = function showReview(review) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "user-review"
@@ -1655,7 +1675,7 @@ var Reviews = function Reviews(_ref) {
       className: "date"
     }, review.date), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "rating"
-    }, review.rating), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, review.comment));
+    }, makeStars(review)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, review.comment));
   };
 
   var sortedReviews = function sortedReviews() {
@@ -2031,6 +2051,50 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (SingleBenchMap);
+
+/***/ }),
+
+/***/ "./frontend/components/static_stars.jsx":
+/*!**********************************************!*\
+  !*** ./frontend/components/static_stars.jsx ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var StaticStars = function StaticStars(_ref) {
+  var rating = _ref.rating;
+
+  var starClass = function starClass(val) {
+    var roundedRating = Math.ceil(rating);
+
+    if (val <= rating) {
+      return 'selected-star';
+    }
+
+    if (val === roundedRating) {
+      return 'partial-star';
+    }
+
+    return '';
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "static-stars"
+  }, [1, 2, 3, 4, 5].map(function (val) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      key: val,
+      className: starClass(val)
+    }, "\u2605");
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (StaticStars);
 
 /***/ }),
 

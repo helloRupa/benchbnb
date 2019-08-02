@@ -20,6 +20,16 @@
     display: block;
     text-align: left;
     margin-bottom: 5px;
+
+    .stars {
+      span {
+        cursor: default;
+      }
+
+      span:hover {
+        color: $yellow;
+      }
+    }
   }
 }
 

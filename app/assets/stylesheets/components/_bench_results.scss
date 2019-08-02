@@ -28,6 +28,11 @@
     min-height: 110px;
     cursor: pointer;
 
+    .static-stars {
+      display: inline-block;
+      cursor: pointer;
+    }
+
     img {
       width: 100px;
       height: 100%;

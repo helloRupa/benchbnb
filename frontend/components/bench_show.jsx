@@ -3,6 +3,7 @@ import SingleBenchMap from './single_bench_map';
 import { Link } from 'react-router-dom';
 import ReviewFormContainer from './review_form_container';
 import Reviews from './reviews';
+import StaticStars from './static_stars';
 
 export default class BenchShow extends React.Component {
   constructor(props) {
@@ -42,7 +43,8 @@ export default class BenchShow extends React.Component {
         <ul className="details">
           <img src={bench.image} />
           <li><h2>{bench.description}</h2></li>
-          <li>Score: {bench.rating} ({bench.num_reviews} {review_text})</li>
+          <li><StaticStars rating={bench.rating} /></li>
+          <li>{bench.rating} ({bench.num_reviews} {review_text})</li>
           <li>{bench.seating} seats</li>
           <li>Latitude: {bench.lat}</li>
           <li>Longitude: {bench.lng}</li>

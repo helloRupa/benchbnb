@@ -1,6 +1,6 @@
 .stars {
   margin: 5px 0 24px 0;
-  
+
   .selected-star {
     color: $yellow;
   }
@@ -13,5 +13,25 @@
 
   span:hover {
     color: $light-yellow;
+  }
+}
+
+.static-stars {
+  cursor: default;
+  margin: 5px 0 24px 0;
+
+  .selected-star {
+    color: $yellow;
+  }
+
+  .partial-star {
+    background: linear-gradient(to right, $yellow 45%, $black 0%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  span {
+    padding-right: 3px;
   }
 }

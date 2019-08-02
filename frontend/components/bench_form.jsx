@@ -95,7 +95,7 @@ class BenchForm extends React.Component {
         <input type="file" id="file" accept=".jpg,.png,.gif,.jpeg" onChange={this.handleFile} />
         {this.preview()}
 
-        <input type="submit" onClick={this.handleSubmit} />
+        <input type="submit" onClick={this.handleSubmit} value="Submit" />
       </form>
       </div>
     );
