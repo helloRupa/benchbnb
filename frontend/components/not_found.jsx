@@ -11,7 +11,7 @@ const NotFound = () => {
   ][Math.floor(Math.random() * 5)];
 
   return (
-    <section className="404">
+    <section className="not-found">
       <h1>404: Page or Bench Not Found</h1>
       <div>{ message }</div>
       <Link to="/">Go home if you want.</Link>
