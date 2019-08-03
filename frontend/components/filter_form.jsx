@@ -8,12 +8,16 @@ export default class FilterForm extends React.Component {
   }
 
   handleChange(e) {
-    this.setState({ [e.currentTarget.name]: parseInt(e.currentTarget.value, 10) || this.state[e.currentTarget.name] },
-    () => {
-      if (this.state.min_seating <= this.state.max_seating) {
-        this.props.updateSeating(this.state);
-      }
-    });    
+    const value = e.currentTarget.value;
+
+    if (value != '') {
+      this.setState({ [e.currentTarget.name]: parseInt(value, 10) },
+      () => {
+        if (this.state.min_seating <= this.state.max_seating) {
+          this.props.updateSeating(this.state);
+        }
+      });   
+    } 
   }
 
   render() {
@@ -26,7 +30,6 @@ export default class FilterForm extends React.Component {
           id="minSeating"
           name="min_seating"
           min="1"
-          value={this.state.min_seating}
           onChange={this.handleChange} />
         </div>
 
@@ -37,7 +40,6 @@ export default class FilterForm extends React.Component {
           id="maxSeating"
           name="max_seating"
           min="1"
-          value={this.state.max_seating}
           onChange={this.handleChange} />
         </div>
       </form>
