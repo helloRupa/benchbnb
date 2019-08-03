@@ -4,7 +4,7 @@ import merge from 'lodash/merge';
 const initialState = {
   bounds: {},
   min_seating: 1,
-  max_seating: 1000,
+  max_seating: 10,
 };
 
 const filterReducer = (state = initialState, action) => {
