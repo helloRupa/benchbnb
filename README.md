@@ -1,24 +1,43 @@
-# README
+# Bench BnB
+A web app for viewing and reviewing benches, centered in San Francisco.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Live Demo: http://bench-bnb-by-rupa.herokuapp.com/#/
 
-Things you may want to cover:
+## Features
+* User authentication
+* Review existing benches
+* Add new benches by clicking the map
+* Sort and filter benches
 
-* Ruby version
+## Dependencies
+* Rails 5.2.3
+* Ruby 2.5.1
+* AWS (for image storage)
+* Webpack
+* React
+* Redux
+* NPM
 
-* System dependencies
+For a full list, check package.json and Gemfile.
 
-* Configuration
+## Set Up Project
+Run the following commands to install Ruby/Rails/React dependencies and to set up the database:
 
-* Database creation
+* bundle install
+* bundle exec rails db:create
+* bundle exec rails db:migrate
+* bundle exec rails db:seed (Seed file may not be up to date with current schema!)
+* npm install
 
-* Database initialization
+Add the following to your Rails credentials:
 
-* How to run the test suite
+* google_maps_api_key: YOUR-API-KEY
+* AWS credentials (set up your buckets first!!)
 
-* Services (job queues, cache servers, search engines, etc.)
+## Run Project Locally
+Run the following commands:
 
-* Deployment instructions
+* npm run webpack
+* rails s
 
-* ...
+Navigate to localhost:3000/
