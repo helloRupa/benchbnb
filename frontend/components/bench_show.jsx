@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import ReviewFormContainer from './review_form_container';
 import Reviews from './reviews';
 import StaticStars from './static_stars';
-import LoadingContainer from './loading_container';
 
 export default class BenchShow extends React.Component {
   constructor(props) {
@@ -37,7 +36,6 @@ export default class BenchShow extends React.Component {
 
     return (
       <section className="bench-details">
-        <LoadingContainer />
         <Link to="/" className="back-link">{"<<"} Back to benches</Link>
 
         <div className="clear-fix">

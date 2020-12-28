@@ -1,29 +1,29 @@
-import * as APIUtil from '../util/bench_api_util';
-import { loading, doneLoading } from './loading_actions';
+import * as APIUtil from "../util/bench_api_util";
+import { loading, doneLoading } from "./loading_actions";
 
-export const RECEIVE_BENCHES = 'RECEIVE_BENCHES';
-export const RECEIVE_BENCH = 'RECEIVE_BENCH';
-export const RECEIVE_BENCH_ERRORS = 'RECEIVE_BENCH_ERRORS';
-export const RECEIVE_SINGLE_BENCH = 'RECEIVE_SINGLE_BENCH';
+export const RECEIVE_BENCHES = "RECEIVE_BENCHES";
+export const RECEIVE_BENCH = "RECEIVE_BENCH";
+export const RECEIVE_BENCH_ERRORS = "RECEIVE_BENCH_ERRORS";
+export const RECEIVE_SINGLE_BENCH = "RECEIVE_SINGLE_BENCH";
 
 export const receiveBenches = (benches) => ({
   type: RECEIVE_BENCHES,
-  benches
+  benches,
 });
 
 export const receiveBench = (bench) => ({
   type: RECEIVE_BENCH,
-  bench
+  bench,
 });
 
 export const receiveErrors = (errors) => ({
   type: RECEIVE_BENCH_ERRORS,
-  errors
+  errors,
 });
 
 export const receiveSingleBench = (bench) => ({
   type: RECEIVE_SINGLE_BENCH,
-  bench
+  bench,
 });
 
 export const fetchBenches = (filters, shouldLoad = true) => (dispatch) => {
@@ -44,7 +44,7 @@ export const createBench = (bench) => (dispatch) => {
 
   return APIUtil.createBench(bench)
     .then(
-      (bench) => { 
+      (bench) => {
         dispatch(receiveBench(bench));
         return bench;
       },
