@@ -14,6 +14,10 @@
   span:hover {
     color: $light-yellow;
   }
+
+  span:has(~ span:hover) {
+    color: $light-yellow;
+  }
 }
 
 .static-stars {
